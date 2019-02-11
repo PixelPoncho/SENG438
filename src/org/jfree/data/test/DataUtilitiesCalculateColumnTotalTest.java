@@ -55,7 +55,7 @@ public class DataUtilitiesCalculateColumnTotalTest extends DataUtilities {
 		
 		//What am I supposed to assert? There is no defined behaviour for this case
 		//ERROR: This works when expecting 6 for some reason?
-		assertEquals(result, 5, 000000001d);
+		assertEquals(5, result, 000000001d);
 	}
 
 	@Test
