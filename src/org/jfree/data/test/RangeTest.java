@@ -99,6 +99,43 @@ public class RangeTest {
 				exampleRange.contains(centralValue));
 	}
 
+	@Test
+	public void constrainsMyCentral() {
+		// exampleRange = new Range(0,10);
+		double centralValue = (upper + lower) / 2; // not using inbuilt cntralvalue because reasons
+		assertEquals("range " + lower + " and " + upper + " should constrain " + centralValue, centralValue,
+				exampleRange.constrain(centralValue), .000000001d);
+	}
+
+	@Test
+	public void constrainsBLB() {
+		// exampleRange = new Range(0,10);
+		double BLB = lower - 1;
+		assertEquals("range " + lower + " and " + upper + " should constrain " + BLB + " to " + lower, lower,
+				exampleRange.constrain(BLB), .000000001d);
+	}
+	@Test
+	public void constrainsLB() {
+		// exampleRange = new Range(0,10);
+		double LB = lower;
+		assertEquals("range " + lower + " and " + upper + " should constrain " + LB + " to " + lower, lower,
+				exampleRange.constrain(LB), .000000001d);
+	}
+	
+	@Test
+	public void constrainsAUB() {
+		// exampleRange = new Range(0,10);
+		double AUB = upper + 1;
+		assertEquals("range " + lower + " and " + upper + " should constrain " + AUB + " to " + upper, upper,
+				exampleRange.constrain(AUB), .000000001d);
+	}
+	@Test
+	public void constrainsUB() {
+		// exampleRange = new Range(0,10);
+		double UB = upper;
+		assertEquals("range " + lower + " and " + upper + " should constrain " + UB + " to " + upper, upper,
+				exampleRange.constrain(UB), .000000001d);
+	}
 	@After
 	public void tearDown() throws Exception {
 	}
