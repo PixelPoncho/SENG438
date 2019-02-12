@@ -63,6 +63,33 @@ public class RangeTest {
 				exampleRange.getUpperBound(), .000000001d);
 	}
 
+	@Test
+	public void containsBLB() {
+		// exampleRange = new Range(0,10);
+		double BLB = lower - 1;
+		assertFalse("range " + lower + " and " + upper + " should NOT contain " + BLB, exampleRange.contains(BLB));
+	}
+
+	@Test
+	public void containsLB() {
+		// exampleRange = new Range(0,10);
+		double LB = lower;
+		assertTrue("range " + lower + " and " + upper + " should contain " + LB, exampleRange.contains(LB));
+	}
+
+	@Test
+	public void containsAUB() {
+		// exampleRange = new Range(0,10);
+		double AUB = upper + 1;
+		assertTrue("range " + lower + " and " + upper + " should contain " + AUB, exampleRange.contains(AUB));
+	}
+
+	@Test
+	public void containsUB() {
+		// exampleRange = new Range(0,10);
+		double UB = upper;
+		assertTrue("range " + lower + " and " + upper + " should contain " + UB, exampleRange.contains(UB));
+	}
 	@After
 	public void tearDown() throws Exception {
 	}
