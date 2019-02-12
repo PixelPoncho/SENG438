@@ -19,8 +19,8 @@ public class RangeTest {
 	 */
 
 	private Range exampleRange;
-	private double upper = 1;
-	private double lower = -1;
+	private double upper = -15;
+	private double lower = -15;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -33,7 +33,7 @@ public class RangeTest {
 	}
 
 	@Test
-	public void centralValueShouldBeZero() {
+	public void centralValue() {
 		double centralValue = (upper + lower) / 2;
 		assertEquals("The central value of " + lower + " and " + upper + " should be " + centralValue, centralValue,
 				exampleRange.getCentralValue(), .000000001d);
@@ -56,9 +56,9 @@ public class RangeTest {
 	@Test
 	public void getLength() {
 		// exampleRange = new Range(0,10);
-		double absUpper = Math.abs(upper);
-		double absLower = Math.abs(lower);
-		double myCalcLength = absUpper + absLower;
+		// double absUpper = Math.abs(upper);
+		// double absLower = Math.abs(lower);
+		double myCalcLength = upper - lower;
 		assertEquals("The length value of " + lower + " and " + upper + " should be " + myCalcLength, myCalcLength,
 				exampleRange.getUpperBound(), .000000001d);
 	}
@@ -81,7 +81,7 @@ public class RangeTest {
 	public void containsAUB() {
 		// exampleRange = new Range(0,10);
 		double AUB = upper + 1;
-		assertTrue("range " + lower + " and " + upper + " should contain " + AUB, exampleRange.contains(AUB));
+		assertFalse("range " + lower + " and " + upper + " should NOT contain " + AUB, exampleRange.contains(AUB));
 	}
 
 	@Test
@@ -90,14 +90,15 @@ public class RangeTest {
 		double UB = upper;
 		assertTrue("range " + lower + " and " + upper + " should contain " + UB, exampleRange.contains(UB));
 	}
-	
+
 	@Test
 	public void containsMyCentral() {
 		// exampleRange = new Range(0,10);
-		double centralValue = (upper + lower) / 2; //not using inbuilt cntralvalue because reasons
-		assertTrue("range " + lower + " and " + upper + " should contain " + centralValue, exampleRange.contains(centralValue));
+		double centralValue = (upper + lower) / 2; // not using inbuilt cntralvalue because reasons
+		assertTrue("range " + lower + " and " + upper + " should contain " + centralValue,
+				exampleRange.contains(centralValue));
 	}
-	
+
 	@After
 	public void tearDown() throws Exception {
 	}
