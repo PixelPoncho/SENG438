@@ -90,6 +90,14 @@ public class RangeTest {
 		double UB = upper;
 		assertTrue("range " + lower + " and " + upper + " should contain " + UB, exampleRange.contains(UB));
 	}
+	
+	@Test
+	public void containsMyCentral() {
+		// exampleRange = new Range(0,10);
+		double centralValue = (upper + lower) / 2; //not using inbuilt cntralvalue because reasons
+		assertTrue("range " + lower + " and " + upper + " should contain " + centralValue, exampleRange.contains(centralValue));
+	}
+	
 	@After
 	public void tearDown() throws Exception {
 	}
