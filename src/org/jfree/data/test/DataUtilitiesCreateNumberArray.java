@@ -64,15 +64,22 @@ public class DataUtilitiesCreateNumberArray extends DataUtilities {
 	public void tearDown() throws Exception {
 	}
 	
-	/**
-	 * Calculate row total one null value.
-	 */
 	@Test
 	public void createNumberArrayBasic() {
 		double[] testInput = { 2.0, 3.0 };
 		Number[] testOutput = { 2.0, 3.0 };
 		
 		Number[] result = DataUtilities.createNumberArray(testInput);
+		
+		assertArrayEquals(testOutput, result);
+	}
+	
+	@Test
+	public void createNumberArray@DBasic() {
+		double[][] testInput = {{ 2.0, 3.0 }, {4.0, 5.0}};
+		Number[][] testOutput = {{ 2.0, 3.0 }, { 4.0, 5.0 }};
+		
+		Number[][] result = DataUtilities.createNumberArray2D(testInput);
 		
 		assertArrayEquals(testOutput, result);
 	}
