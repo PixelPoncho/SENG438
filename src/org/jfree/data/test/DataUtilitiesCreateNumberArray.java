@@ -20,10 +20,10 @@ import org.junit.Test;
 public class DataUtilitiesCreateNumberArray extends DataUtilities {
 	
 	/** The mocking context. */
-	private Mockery	mockingContext;
+	// private Mockery mockingContext;
 	
 	/** The mocked dependancy. */
-	Values2D		mockedDependancy;
+	// Values2D mockedDependancy;
 	
 	/**
 	 * Sets the up before class.
@@ -51,8 +51,8 @@ public class DataUtilitiesCreateNumberArray extends DataUtilities {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		mockingContext = new Mockery();
-		mockedDependancy = mockingContext.mock(Values2D.class);
+		// mockingContext = new Mockery();
+		// mockedDependancy = mockingContext.mock(Values2D.class);
 	}
 	
 	/**
@@ -115,6 +115,16 @@ public class DataUtilitiesCreateNumberArray extends DataUtilities {
 	}
 	
 	@Test
+	public void createNumberArraySomeNegative() {
+		double[] testInput = { -10.0, 3.0, -2.0, 9.0 };
+		Number[] testOutput = { -10.0, 3.0, -2.0, 9.0 };
+		
+		Number[] result = DataUtilities.createNumberArray(testInput);
+		
+		assertArrayEquals(testOutput, result);
+	}
+	
+	@Test
 	public void createNumberArray2DBasic() {
 		double[][] testInput = { { 2.0, 3.0 }, { 4.0, 5.0 } };
 		Number[][] testOutput = { { 2.0, 3.0 }, { 4.0, 5.0 } };
@@ -123,6 +133,52 @@ public class DataUtilitiesCreateNumberArray extends DataUtilities {
 		
 		assertArrayEquals(testOutput[0], result[0]);
 		assertArrayEquals(testOutput[1], result[1]);
+	}
+	
+	@Test
+	public void createNumberArray2DNegative() {
+		double[][] testInput = { { -2.0, -3.0 }, { -4.0, -5.0 }, { -6.0, -7.0 } };
+		Number[][] testOutput = { { -2.0, -3.0 }, { -4.0, -5.0 }, { -6.0, -7.0 } };
+		
+		Number[][] result = DataUtilities.createNumberArray2D(testInput);
+		
+		assertArrayEquals(testOutput[0], result[0]);
+		assertArrayEquals(testOutput[1], result[1]);
+		assertArrayEquals(testOutput[2], result[2]);
+	}
+	
+	@Test
+	public void createNumberArray2DSomeNegative() {
+		double[][] testInput = { { -2.0, 3.0 }, { -4.0, -5.0 }, { 6.0, 7.0 } };
+		Number[][] testOutput = { { -2.0, 3.0 }, { -4.0, -5.0 }, { 6.0, 7.0 } };
+		
+		Number[][] result = DataUtilities.createNumberArray2D(testInput);
+		
+		assertArrayEquals(testOutput[0], result[0]);
+		assertArrayEquals(testOutput[1], result[1]);
+		assertArrayEquals(testOutput[2], result[2]);
+	}
+	
+	@Test
+	public void createNumberArray2DZeros() {
+		double[][] testInput = { { 0.0, 0.0 }, { 0.0, 0.0 } };
+		Number[][] testOutput = { { 0.0, 0.0 }, { 0.0, 0.0 } };
+		
+		Number[][] result = DataUtilities.createNumberArray2D(testInput);
+		
+		assertArrayEquals(testOutput[0], result[0]);
+		assertArrayEquals(testOutput[1], result[1]);
+	}
+	
+	@Test
+	public void createNumberArray2DOneZero() {
+		double[][] testInput = { { 0.0 } };
+		Number[][] testOutput = { { 0.0 } };
+		
+		Number[][] result = DataUtilities.createNumberArray2D(testInput);
+		
+		assertArrayEquals(testOutput[0], result[0]);
+		// assertArrayEquals(testOutput[1], result[1]);
 	}
 	
 	@Test
