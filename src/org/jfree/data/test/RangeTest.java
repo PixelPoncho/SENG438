@@ -9,15 +9,21 @@ import org.jfree.data.Range;
 import org.junit.*;
 
 /**
- * -
+ * <pre>
  * 
  * The Class RangeTest.
  * 
  * To be able to test any given range, one MUST CHANGE the 2 class variables:
- * upper and lower. Some example ranges: (0,0) (-1,1) (1,-1) (5,5) (-5,-5)
+ * upper and lower. Some example ranges: 
+ * (0,0) 
+ * (-1,1) 
+ * (1,-1)
+ * (5,5) 
+ * (-5,-5)
  * (100000000000000,100000000000000)
  *
  * @author arebe
+ * </pre>
  */
 
 public class RangeTest {

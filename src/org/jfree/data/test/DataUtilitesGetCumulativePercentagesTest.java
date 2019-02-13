@@ -2,6 +2,8 @@ package org.jfree.data.test;
 
 import static org.junit.Assert.*;
 
+import java.awt.List;
+
 import org.jfree.data.DataUtilities;
 import org.jfree.data.KeyedValues;
 import org.jfree.data.Values2D;
@@ -15,7 +17,34 @@ import org.junit.Test;
 
 // TODO: Auto-generated Javadoc
 /**
+ * <pre>
  * The Class DataUtilitesGetCumulativePercentagesTest.
+ * 
+ * Returns a KeyedValues instance that contains the cumulative percentage values 
+ * for the data in another KeyedValues instance. The cumulative percentage is each value's 
+ * cumulative sum's portion of the sum of all the values. 
+ * eg: 
+ * Input:
+ * Key  Value
+ * 0        5
+ * 1        9
+ * 2        2
+ * 
+ * Returns:
+ * Key  Value
+ * 0     0.3125 (5 / 16)
+ * 1     0.875 ((5 + 9) / 16)
+ * 2     1.0 ((5 + 9 + 2) / 16)
+ * The percentages are values between 0.0 and 1.0 (where 1.0 = 100%).
+ * 
+ * Parameters:
+ * data - the data (null not permitted).
+ * 
+ * Returns:
+ * The cumulative percentages.
+ * Throws:
+ * InvalidParameterException - if invalid data object is passed in.
+ * </pre>
  */
 public class DataUtilitesGetCumulativePercentagesTest extends DataUtilities {
 	
@@ -77,13 +106,14 @@ public class DataUtilitesGetCumulativePercentagesTest extends DataUtilities {
 			//java.lang.Number getValue(java.lang.Comparable
 		mockingContext.checking( new Expectations() {
 			{
-				one(mockedDependancy).getIndex();
-				will(returnValue());
+				one(mockedDependancy).getIndex(any(Comparable));
+				will(returnValue(-1)); //Will throw java.lang.IndexOutOfBoundsException
 				one(mockedDependancy).getKeys();
-				will(returnValue();
+				will(returnValue(new List());
 				one(mockedDependancy).getKey();
-				will(returnValue());
+				will(returnValue(null));
 				one(mockedDependancy).getValue();
+				will(returnValue(null));
 			}
 		});
 	}
@@ -100,10 +130,12 @@ public class DataUtilitesGetCumulativePercentagesTest extends DataUtilities {
 			//java.util.List getKeys()
 			//java.lang.Comparable getKey(int)
 			//java.lang.Number getValue(java.lang.Comparable
+			//Methods inherited from interface :org.jfree.data.Values
+			//getItemCount, getValue
 		mockingContext.checking( new Expectations() {
 			{
 				one(mockedDependancy).getIndex();
-				will(returnValue());
+				will(returnValue()); 
 				one(mockedDependancy).getKeys();
 				will(returnValue();
 				one(mockedDependancy).getKey();
@@ -121,10 +153,10 @@ public class DataUtilitesGetCumulativePercentagesTest extends DataUtilities {
 	@Test
 	public void getCumulativePercentageTestNullValues() {
 		//METHODS TO SIMULATE:
-			//int getIndex(java.lang.Comparable)
+			//int getIndex(java.lang.Comparable key)
 			//java.util.List getKeys()
-			//java.lang.Comparable getKey(int)
-			//java.lang.Number getValue(java.lang.Comparable
+			//java.lang.Comparable getKey(int index)
+			//java.lang.Number getValue(java.lang.Comparable key)
 		mockingContext.checking( new Expectations() {
 			{
 				one(mockedDependancy).getIndex();
