@@ -88,6 +88,8 @@ public class getLowerBoundTest {
 		
 	}
 	
+	
+	/*Error Thrown By Constructor - change value w. reflection set then check?*/
 	/*
 	@Test
 	public void testLowerBoundGreaterThanUpper() {
