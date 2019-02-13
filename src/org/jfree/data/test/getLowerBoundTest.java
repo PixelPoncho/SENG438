@@ -9,20 +9,21 @@ import java.util.List;
 import org.jfree.data.Range;
 import org.junit.Test;
 
-public class getLowerBoundTest{
-
+/**
+ * The Class getLowerBoundTest.
+ */
+public class getLowerBoundTest {
+	
+	/**
+	 * Test.
+	 */
 	@Test
 	public void test() {
 		Range exampleRange = new Range(-1, 1);
 		
-		Class<Range>rangeClass = Range.class;
+		Class<Range> rangeClass = Range.class;
 		
 		double testedLowerBound = exampleRange.getLowerBound();
-		
-		
-		
-		
-		
 		
 		Field fieldLowerBound = null;
 		try {
@@ -36,7 +37,7 @@ public class getLowerBoundTest{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//fieldLowerBound.set()
+		// fieldLowerBound.set()
 		
 		double actualLowerBound = 0;
 		try {
@@ -45,9 +46,10 @@ public class getLowerBoundTest{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//double actualLowerBound = 
-		assertEquals("Value retrieved through getter and reflection should be the same", actualLowerBound, testedLowerBound, .000000001d);
+		// double actualLowerBound =
+		assertEquals("Value retrieved through getter and reflection should be the same", actualLowerBound,
+				testedLowerBound, .000000001d);
 		
 	}
-
+	
 }
