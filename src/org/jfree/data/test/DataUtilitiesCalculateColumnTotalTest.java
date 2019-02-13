@@ -13,60 +13,101 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DataUtilitiesCalculateColumnTotalTest.
+ */
 public class DataUtilitiesCalculateColumnTotalTest extends DataUtilities {
-	private Mockery mockingContext;
-	Values2D mockedDependancy;
 	
+	/** The mocking context. */
+	private Mockery	mockingContext;
+	
+	/** The mocked dependancy. */
+	Values2D		mockedDependancy;
+	
+	/**
+	 * Sets the up before class.
+	 *
+	 * @throws Exception the exception
+	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		
 	}
-
+	
+	/**
+	 * Tear down after class.
+	 *
+	 * @throws Exception the exception
+	 */
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 	}
-
+	
+	/**
+	 * Sets the up.
+	 *
+	 * @throws Exception the exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 		mockingContext = new Mockery();
 		mockedDependancy = mockingContext.mock(Values2D.class);
 	}
-
+	
+	/**
+	 * Tear down.
+	 *
+	 * @throws Exception the exception
+	 */
 	@After
 	public void tearDown() throws Exception {
 	}
 	
-	//I have no idea what is supposed to happen, but it appears to treat the null as a 1
-	//This case is not covered by the requirements... are we supposed to do it still?
+	/**
+	 * Calculate column total one null value. 
+	 * 
+	 * This case is not covered by the
+	 * requirements... are we supposed to do it still? I have no idea what is
+	 * supposed to happen, but it appears to treat the null as a 1
+	 */
 	@Test
 	public void calculateColumnTotalOneNullValue() {
-		mockingContext.checking( new Expectations() {
+		mockingContext.checking(new Expectations() {
 			{
 				one(mockedDependancy).getRowCount();
 				will(returnValue(2));
 				one(mockedDependancy).getValue(0, 0);
 				will(returnValue(null));
-				one(mockedDependancy).getValue(1,  0);
+				one(mockedDependancy).getValue(1, 0);
 				will(returnValue(5));
 			}
 		});
 		
 		double result = DataUtilities.calculateColumnTotal(mockedDependancy, 0);
 		
+<<<<<<< HEAD
 		//What am I supposed to assert? There is no defined behaviour for this case
 		//ERROR: This works when expecting 6 for some reason?
+=======
+		// What am I supposed to assert? There is no defined behaviour for this case
+		// ERROR: This works when expecting 6 for some reason?
+>>>>>>> 71d234e0b8f45f38469ed699d1e9d7276dcd24cf
 		assertEquals(5, result, 000000001d);
 	}
-
+	
+	/**
+	 * Calculate column total with pos and neg data values high postive row value.
+	 */
 	@Test
 	public void calculateColumnTotalWithPosAndNegDataValuesHighPostiveRowValue() {
-		mockingContext.checking( new Expectations() {
+		mockingContext.checking(new Expectations() {
 			{
 				one(mockedDependancy).getRowCount();
 				will(returnValue(2));
 				one(mockedDependancy).getValue(0, 1000000);
 				will(returnValue(2.5));
-				one(mockedDependancy).getValue(1,  1000000);
+				one(mockedDependancy).getValue(1, 1000000);
 				will(returnValue(-3.5));
 			}
 		});
@@ -76,67 +117,80 @@ public class DataUtilitiesCalculateColumnTotalTest extends DataUtilities {
 		assertEquals(-1.0, result, 000000001d);
 	}
 	
+	/**
+	 * Calculate column total for two positive values zero row value.
+	 */
 	@Test
 	public void calculateColumnTotalForTwoPositiveValuesZeroRowValue() {
-		mockingContext.checking(
-				new Expectations() {{
-					one(mockedDependancy).getRowCount(); 
-					will(returnValue(2)); 
-					one(mockedDependancy).getValue(0, 0); 
-					will(returnValue(7.5)); 
-					one(mockedDependancy).getValue(1, 0);
-					will(returnValue(2.5));
-				}}
-			);
-	
+		mockingContext.checking(new Expectations() {
+			{
+				one(mockedDependancy).getRowCount();
+				will(returnValue(2));
+				one(mockedDependancy).getValue(0, 0);
+				will(returnValue(7.5));
+				one(mockedDependancy).getValue(1, 0);
+				will(returnValue(2.5));
+			}
+		});
+		
 		double result = DataUtilities.calculateColumnTotal(mockedDependancy, 0);
-	
-		assertEquals(10.0, result, .000000001d); 
+		
+		assertEquals(10.0, result, .000000001d);
 	}
 	
-	@Test (expected = IndexOutOfBoundsException.class)
+	/**
+	 * Calculate column total for two positive values negative row value.
+	 */
+	@Test(expected = IndexOutOfBoundsException.class)
 	public void calculateColumnTotalForTwoPositiveValuesNegativeRowValue() {
-		mockingContext.checking(
-				new Expectations() {{
-					one(mockedDependancy).getRowCount(); 
-					will(returnValue(2)); 
-					one(mockedDependancy).getValue(0, -1); 
-				//This seems redundant. Is there a correct way to mock this? What are we even testing for at this point?
-				//It seems like all we are testing is that the -1 gets passed to the .getValue method properly
-					will(throwException(new IndexOutOfBoundsException())); 
-					one(mockedDependancy).getValue(1, -1);
-					will(returnValue(2.5));
-				}}
-			);
-	
+		mockingContext.checking(new Expectations() {
+			{
+				one(mockedDependancy).getRowCount();
+				will(returnValue(2));
+				one(mockedDependancy).getValue(0, -1);
+				// This seems redundant. Is there a correct way to mock this? What are we even
+				// testing for at this point?
+				// It seems like all we are testing is that the -1 gets passed to the .getValue
+				// method properly
+				will(throwException(new IndexOutOfBoundsException()));
+				one(mockedDependancy).getValue(1, -1);
+				will(returnValue(2.5));
+			}
+		});
+		
 		double result = DataUtilities.calculateColumnTotal(mockedDependancy, -1);
-	
-		assertEquals(10.0, result, .000000001d); 
+		
+		assertEquals(10.0, result, .000000001d);
 	}
 	
+	/**
+	 * Calculate column total for two high precision doubles.
+	 */
 	@Test
 	public void calculateColumnTotalForTwoHighPrecisionDoubles() {
-		mockingContext.checking(
-				new Expectations() {{
-					one(mockedDependancy).getRowCount(); 
-					will(returnValue(2)); 
-					one(mockedDependancy).getValue(0, 0); 
-					will(returnValue(2.000000001)); 
-					one(mockedDependancy).getValue(1, 0);
-					will(returnValue(2.000000001));
-				}}
-			);
-	
+		mockingContext.checking(new Expectations() {
+			{
+				one(mockedDependancy).getRowCount();
+				will(returnValue(2));
+				one(mockedDependancy).getValue(0, 0);
+				will(returnValue(2.000000001));
+				one(mockedDependancy).getValue(1, 0);
+				will(returnValue(2.000000001));
+			}
+		});
+		
 		double result = DataUtilities.calculateColumnTotal(mockedDependancy, 0);
-	
-		assertEquals(4.000000002, result, .000000001d); 
+		
+		assertEquals(4.000000002, result, .000000001d);
 	}
 	
-	@Test (expected = InvalidParameterException.class)
+	/**
+	 * Calculate column total for null values 2 D.
+	 */
+	@Test(expected = InvalidParameterException.class)
 	public void calculateColumnTotalForNullValues2D() {
-	
+		
 		double result = DataUtilities.calculateColumnTotal(null, 0);
 	}
-
-
+	
 }
