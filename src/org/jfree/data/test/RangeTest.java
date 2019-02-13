@@ -8,27 +8,33 @@ import static org.junit.Assert.*;
 import org.jfree.data.Range;
 import org.junit.*;
 
-// TODO: Auto-generated Javadoc
 /**
+ * -
+ * 
  * The Class RangeTest.
+ * 
+ * To be able to test any given range, one MUST CHANGE the 2 class variables:
+ * upper and lower. Some example ranges: (0,0) (-1,1) (1,-1) (5,5) (-5,-5)
+ * (100000000000000,100000000000000)
  *
  * @author arebe
  */
+
 public class RangeTest {
 	/*
 	 * extends Range { } public RangeTest(double lower, double upper) { super(lower,
 	 * upper); // TODO Auto-generated constructor stub }
 	 */
-
+	
 	/** The example range. */
-	private Range exampleRange;
-
+	private Range	exampleRange;
+	
 	/** The upper. */
-	private double upper = 0;
-
+	private double	upper	= 0;
+	
 	/** The lower. */
-	private double lower = 0;
-
+	private double	lower	= 0;
+	
 	/**
 	 * Sets the up before class.
 	 *
@@ -36,9 +42,9 @@ public class RangeTest {
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-
+		
 	}
-
+	
 	/**
 	 * Sets the up.
 	 *
@@ -48,7 +54,7 @@ public class RangeTest {
 	public void setUp() throws Exception {
 		exampleRange = new Range(lower, upper);
 	}
-
+	
 	/**
 	 * Central value.
 	 */
@@ -58,7 +64,7 @@ public class RangeTest {
 		assertEquals("The central value of " + lower + " and " + upper + " should be " + centralValue, centralValue,
 				exampleRange.getCentralValue(), .000000001d);
 	}
-
+	
 	/**
 	 * Gets the lower bound.
 	 *
@@ -70,7 +76,7 @@ public class RangeTest {
 		assertEquals("The lower bound of  " + lower + " and " + upper + " should be " + lower, lower,
 				exampleRange.getLowerBound(), .000000001d);
 	}
-
+	
 	/**
 	 * Gets the upper bound.
 	 *
@@ -82,7 +88,7 @@ public class RangeTest {
 		assertEquals("The upper bound of " + lower + " and " + upper + " should be " + upper, upper,
 				exampleRange.getUpperBound(), .000000001d);
 	}
-
+	
 	/**
 	 * Gets the length.
 	 *
@@ -97,7 +103,7 @@ public class RangeTest {
 		assertEquals("The length value of " + lower + " and " + upper + " should be " + myCalcLength, myCalcLength,
 				exampleRange.getUpperBound(), .000000001d);
 	}
-
+	
 	/**
 	 * Contains BLB.
 	 */
@@ -107,7 +113,7 @@ public class RangeTest {
 		double BLB = lower - 1;
 		assertFalse("range " + lower + " and " + upper + " should NOT contain " + BLB, exampleRange.contains(BLB));
 	}
-
+	
 	/**
 	 * Contains LB.
 	 */
@@ -117,7 +123,7 @@ public class RangeTest {
 		double LB = lower;
 		assertTrue("range " + lower + " and " + upper + " should contain " + LB, exampleRange.contains(LB));
 	}
-
+	
 	/**
 	 * Contains AUB.
 	 */
@@ -127,7 +133,7 @@ public class RangeTest {
 		double AUB = upper + 1;
 		assertFalse("range " + lower + " and " + upper + " should NOT contain " + AUB, exampleRange.contains(AUB));
 	}
-
+	
 	/**
 	 * Contains UB.
 	 */
@@ -137,7 +143,7 @@ public class RangeTest {
 		double UB = upper;
 		assertTrue("range " + lower + " and " + upper + " should contain " + UB, exampleRange.contains(UB));
 	}
-
+	
 	/**
 	 * Contains my central.
 	 */
@@ -148,7 +154,7 @@ public class RangeTest {
 		assertTrue("range " + lower + " and " + upper + " should contain " + centralValue,
 				exampleRange.contains(centralValue));
 	}
-
+	
 	/**
 	 * Constrains my central.
 	 */
@@ -159,7 +165,7 @@ public class RangeTest {
 		assertEquals("range " + lower + " and " + upper + " should constrain " + centralValue, centralValue,
 				exampleRange.constrain(centralValue), .000000001d);
 	}
-
+	
 	/**
 	 * Constrains BLB.
 	 */
@@ -170,7 +176,7 @@ public class RangeTest {
 		assertEquals("range " + lower + " and " + upper + " should constrain " + BLB + " to " + lower, lower,
 				exampleRange.constrain(BLB), .000000001d);
 	}
-
+	
 	/**
 	 * Constrains LB.
 	 */
@@ -181,7 +187,7 @@ public class RangeTest {
 		assertEquals("range " + lower + " and " + upper + " should constrain " + LB + " to " + lower, lower,
 				exampleRange.constrain(LB), .000000001d);
 	}
-
+	
 	/**
 	 * Constrains AUB.
 	 */
@@ -192,7 +198,7 @@ public class RangeTest {
 		assertEquals("range " + lower + " and " + upper + " should constrain " + AUB + " to " + upper, upper,
 				exampleRange.constrain(AUB), .000000001d);
 	}
-
+	
 	/**
 	 * Constrains UB.
 	 */
@@ -203,7 +209,7 @@ public class RangeTest {
 		assertEquals("range " + lower + " and " + upper + " should constrain " + UB + " to " + upper, upper,
 				exampleRange.constrain(UB), .000000001d);
 	}
-
+	
 	/**
 	 * Tear down.
 	 *
@@ -212,7 +218,7 @@ public class RangeTest {
 	@After
 	public void tearDown() throws Exception {
 	}
-
+	
 	/**
 	 * Tear down after class.
 	 *
@@ -221,5 +227,5 @@ public class RangeTest {
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 	}
-
+	
 }

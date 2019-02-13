@@ -13,28 +13,61 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DataUtilitesGetCumulativePercentagesTest.
+ */
 public class DataUtilitesGetCumulativePercentagesTest extends DataUtilities {
-	private Mockery mockingContext;
-	KeyedValues mockedDependancy;
 	
+	/** The mocking context. */
+	private Mockery	mockingContext;
+	
+	/** The mocked dependancy. */
+	KeyedValues		mockedDependancy;
+	
+	/**
+	 * Sets the up before class.
+	 *
+	 * @throws Exception the exception
+	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
-
+	
+	/**
+	 * Tear down after class.
+	 *
+	 * @throws Exception the exception
+	 */
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 	}
-
+	
+	/**
+	 * Sets the up.
+	 *
+	 * @throws Exception the exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 		mockingContext = new Mockery();
 		mockedDependancy = mockingContext.mock(KeyedValues.class);
 	}
-
+	
+	/**
+	 * Tear down.
+	 *
+	 * @throws Exception the exception
+	 */
 	@After
 	public void tearDown() throws Exception {
 	}
-
+	
+	/**
+	 * Gets the cumulative percentage test empty list.
+	 *
+	 * @return the cumulative percentage test empty list
+	 */
 	@Test
 	public void getCumulativePercentageTestEmptyList() {
 		//METHODS TO SIMULATE:
@@ -55,6 +88,11 @@ public class DataUtilitesGetCumulativePercentagesTest extends DataUtilities {
 		});
 	}
 	
+	/**
+	 * Gets the cumulative percentage test negative values.
+	 *
+	 * @return the cumulative percentage test negative values
+	 */
 	@Test
 	public void getCumulativePercentageTestNegativeValues() {
 		//METHODS TO SIMULATE:
@@ -75,6 +113,11 @@ public class DataUtilitesGetCumulativePercentagesTest extends DataUtilities {
 		});
 	}
 	
+	/**
+	 * Gets the cumulative percentage test null values.
+	 *
+	 * @return the cumulative percentage test null values
+	 */
 	@Test
 	public void getCumulativePercentageTestNullValues() {
 		//METHODS TO SIMULATE:
@@ -95,6 +138,11 @@ public class DataUtilitesGetCumulativePercentagesTest extends DataUtilities {
 		});
 	}
 	
+	/**
+	 * Gets the cumulative percentage test non numeric.
+	 *
+	 * @return the cumulative percentage test non numeric
+	 */
 	@Test
 	public void getCumulativePercentageTestNonNumeric() {
 		//METHODS TO SIMULATE:
@@ -115,6 +163,11 @@ public class DataUtilitesGetCumulativePercentagesTest extends DataUtilities {
 		});
 	}
 	
+	/**
+	 * Gets the cumulative percentage test expected values.
+	 *
+	 * @return the cumulative percentage test expected values
+	 */
 	@Test
 	public void getCumulativePercentageTestExpectedValues() {
 		//METHODS TO SIMULATE:
@@ -134,5 +187,5 @@ public class DataUtilitesGetCumulativePercentagesTest extends DataUtilities {
 			}
 		});
 	}
-
+	
 }
