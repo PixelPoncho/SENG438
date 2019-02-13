@@ -88,7 +88,7 @@ public class DataUtilitiesCalculateColumnTotalTest extends DataUtilities {
 
 		// What am I supposed to assert? There is no defined behaviour for this case
 		// ERROR: This works when expecting 6 for some reason?
-		assertEquals(5, result, 000000001d);
+		assertEquals(5, result, .000000001d);
 	}
 	
 	/**
@@ -109,7 +109,7 @@ public class DataUtilitiesCalculateColumnTotalTest extends DataUtilities {
 		
 		double result = DataUtilities.calculateColumnTotal(mockedDependancy, Integer.MAX_VALUE);
 		
-		assertEquals(-1.0, result, 000000001d);
+		assertEquals(-1.0, result, .000000001d);
 	}
 	
 	/**
