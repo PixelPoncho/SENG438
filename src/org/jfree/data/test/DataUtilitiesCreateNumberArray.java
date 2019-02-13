@@ -75,16 +75,65 @@ public class DataUtilitiesCreateNumberArray extends DataUtilities {
 	}
 	
 	@Test
-	public void createNumberArray@DBasic() {
-		double[][] testInput = {{ 2.0, 3.0 }, {4.0, 5.0}};
-		Number[][] testOutput = {{ 2.0, 3.0 }, { 4.0, 5.0 }};
+	public void createNumberArrayNullInput() {
+		double[] testInput = {};
+		Number[] testOutput = {};
 		
-		Number[][] result = DataUtilities.createNumberArray2D(testInput);
+		Number[] result = DataUtilities.createNumberArray(testInput);
 		
 		assertArrayEquals(testOutput, result);
 	}
 	
-	//@Test(expected = InvalidParameterException.class)
-
+	@Test
+	public void createNumberArrayZeros() {
+		double[] testInput = { 0.0, 0.0 };
+		Number[] testOutput = { 0.0, 0.0 };
+		
+		Number[] result = DataUtilities.createNumberArray(testInput);
+		
+		assertArrayEquals(testOutput, result);
+	}
+	
+	@Test
+	public void createNumberArrayOneZero() {
+		double[] testInput = { 0.0 };
+		Number[] testOutput = { 0.0 };
+		
+		Number[] result = DataUtilities.createNumberArray(testInput);
+		
+		assertArrayEquals(testOutput, result);
+	}
+	
+	@Test
+	public void createNumberArrayNegative() {
+		double[] testInput = { -10.0 };
+		Number[] testOutput = { -10.0 };
+		
+		Number[] result = DataUtilities.createNumberArray(testInput);
+		
+		assertArrayEquals(testOutput, result);
+	}
+	
+	@Test
+	public void createNumberArray2DBasic() {
+		double[][] testInput = { { 2.0, 3.0 }, { 4.0, 5.0 } };
+		Number[][] testOutput = { { 2.0, 3.0 }, { 4.0, 5.0 } };
+		
+		Number[][] result = DataUtilities.createNumberArray2D(testInput);
+		
+		assertArrayEquals(testOutput[0], result[0]);
+		assertArrayEquals(testOutput[1], result[1]);
+	}
+	
+	@Test
+	public void createNumberArray2DNull() {
+		double[][] testInput = { {} };
+		Number[][] testOutput = { {} };
+		
+		Number[][] result = DataUtilities.createNumberArray2D(testInput);
+		
+		assertArrayEquals(testOutput[0], result[0]);
+	}
+	// @Test(expected = InvalidParameterException.class)
 	
 }
