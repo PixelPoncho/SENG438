@@ -85,7 +85,7 @@ public class DataUtilitiesCalculateColumnTotalTest extends DataUtilities {
 		});
 		
 		double result = DataUtilities.calculateColumnTotal(mockedDependancy, 0);
-		
+
 		// What am I supposed to assert? There is no defined behaviour for this case
 		// ERROR: This works when expecting 6 for some reason?
 		assertEquals(5, result, .000000001d);
@@ -100,14 +100,14 @@ public class DataUtilitiesCalculateColumnTotalTest extends DataUtilities {
 			{
 				one(mockedDependancy).getRowCount();
 				will(returnValue(2));
-				one(mockedDependancy).getValue(0, 1000000);
+				one(mockedDependancy).getValue(0, Integer.MAX_VALUE);
 				will(returnValue(2.5));
-				one(mockedDependancy).getValue(1, 1000000);
+				one(mockedDependancy).getValue(1, Integer.MAX_VALUE);
 				will(returnValue(-3.5));
 			}
 		});
 		
-		double result = DataUtilities.calculateColumnTotal(mockedDependancy, 1000000);
+		double result = DataUtilities.calculateColumnTotal(mockedDependancy, Integer.MAX_VALUE);
 		
 		assertEquals(-1.0, result, .000000001d);
 	}

@@ -15,6 +15,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+
 // TODO: Auto-generated Javadoc
 /**
  * <pre>
@@ -77,11 +78,13 @@ public class DataUtilitesGetCumulativePercentagesTest extends DataUtilities {
 	 *
 	 * @throws Exception the exception
 	 */
+
 	@Before
 	public void setUp() throws Exception {
 		mockingContext = new Mockery();
 		mockedDependancy = mockingContext.mock(KeyedValues.class);
 	}
+
 	
 	/**
 	 * Tear down.
@@ -109,7 +112,7 @@ public class DataUtilitesGetCumulativePercentagesTest extends DataUtilities {
 				one(mockedDependancy).getIndex(any(Comparable));
 				will(returnValue(-1)); //Will throw java.lang.IndexOutOfBoundsException
 				one(mockedDependancy).getKeys();
-				will(returnValue(new List());
+				will(returnValue(new List()));
 				one(mockedDependancy).getKey();
 				will(returnValue(null));
 				one(mockedDependancy).getValue();
@@ -118,6 +121,7 @@ public class DataUtilitesGetCumulativePercentagesTest extends DataUtilities {
 		});
 	}
 	
+
 	/**
 	 * Gets the cumulative percentage test negative values.
 	 *
@@ -130,6 +134,7 @@ public class DataUtilitesGetCumulativePercentagesTest extends DataUtilities {
 			//java.util.List getKeys()
 			//java.lang.Comparable getKey(int)
 			//java.lang.Number getValue(java.lang.Comparable
+		
 			//Methods inherited from interface :org.jfree.data.Values
 			//getItemCount, getValue
 		mockingContext.checking( new Expectations() {
@@ -137,7 +142,7 @@ public class DataUtilitesGetCumulativePercentagesTest extends DataUtilities {
 				one(mockedDependancy).getIndex();
 				will(returnValue()); 
 				one(mockedDependancy).getKeys();
-				will(returnValue();
+				will(returnValue());
 				one(mockedDependancy).getKey();
 				will(returnValue());
 				one(mockedDependancy).getValue();
@@ -162,7 +167,7 @@ public class DataUtilitesGetCumulativePercentagesTest extends DataUtilities {
 				one(mockedDependancy).getIndex();
 				will(returnValue());
 				one(mockedDependancy).getKeys();
-				will(returnValue();
+				will(returnValue());
 				one(mockedDependancy).getKey();
 				will(returnValue());
 				one(mockedDependancy).getValue();
@@ -175,6 +180,7 @@ public class DataUtilitesGetCumulativePercentagesTest extends DataUtilities {
 	 *
 	 * @return the cumulative percentage test non numeric
 	 */
+
 	@Test
 	public void getCumulativePercentageTestNonNumeric() {
 		//METHODS TO SIMULATE:
@@ -187,7 +193,7 @@ public class DataUtilitesGetCumulativePercentagesTest extends DataUtilities {
 				one(mockedDependancy).getIndex();
 				will(returnValue());
 				one(mockedDependancy).getKeys();
-				will(returnValue();
+				will(returnValue());
 				one(mockedDependancy).getKey();
 				will(returnValue());
 				one(mockedDependancy).getValue();
@@ -200,6 +206,7 @@ public class DataUtilitesGetCumulativePercentagesTest extends DataUtilities {
 	 *
 	 * @return the cumulative percentage test expected values
 	 */
+
 	@Test
 	public void getCumulativePercentageTestExpectedValues() {
 		//METHODS TO SIMULATE:
@@ -212,12 +219,11 @@ public class DataUtilitesGetCumulativePercentagesTest extends DataUtilities {
 				one(mockedDependancy).getIndex();
 				will(returnValue());
 				one(mockedDependancy).getKeys();
-				will(returnValue();
+				will(returnValue());
 				one(mockedDependancy).getKey();
 				will(returnValue());
 				one(mockedDependancy).getValue();
 			}
 		});
 	}
-	
 }

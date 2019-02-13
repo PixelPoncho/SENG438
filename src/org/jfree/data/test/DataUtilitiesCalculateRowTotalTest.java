@@ -54,7 +54,7 @@ public class DataUtilitiesCalculateRowTotalTest extends DataUtilities {
 		mockingContext = new Mockery();
 		mockedDependancy = mockingContext.mock(Values2D.class);
 	}
-	
+
 	/**
 	 * Tear down.
 	 *
@@ -64,8 +64,7 @@ public class DataUtilitiesCalculateRowTotalTest extends DataUtilities {
 	public void tearDown() throws Exception {
 	}
 	
-	// I have no idea what is supposed to happen, but it appears to treat the null
-	// as a 1
+	
 	/**
 	 * Calculate row total one null value.
 	 */
@@ -74,6 +73,7 @@ public class DataUtilitiesCalculateRowTotalTest extends DataUtilities {
 	@Test
 	public void calculateRowTotalOneNullValue() {
 		mockingContext.checking(new Expectations() {
+
 			{
 				one(mockedDependancy).getColumnCount();
 				will(returnValue(2));
@@ -86,28 +86,29 @@ public class DataUtilitiesCalculateRowTotalTest extends DataUtilities {
 		
 		double result = DataUtilities.calculateRowTotal(mockedDependancy, 0);
 		
-		// What am I supposed to assert? There is no defined behaviour for this case
-		// ERROR: This works when expecting 6 for some reason?
+		//What am I supposed to assert? There is no defined behaviour for this case
+		//ERROR: This works when expecting 6 for some reason?
 		assertEquals(5, result, 000000001d);
 	}
-	
+
 	/**
 	 * Calculate row total with pos and neg data values high postive row value.
 	 */
 	@Test
 	public void calculateRowTotalWithPosAndNegDataValuesHighPostiveRowValue() {
-		mockingContext.checking(new Expectations() {
+		mockingContext.checking(
+				new Expectations() {
 			{
 				one(mockedDependancy).getColumnCount();
 				will(returnValue(2));
-				one(mockedDependancy).getValue(1000000, 0);
+				one(mockedDependancy).getValue(Integer.MAX_VALUE, 0);
 				will(returnValue(-3.5));
-				one(mockedDependancy).getValue(1000000, 1);
+				one(mockedDependancy).getValue(Integer.MAX_VALUE, 1);
 				will(returnValue(2.5));
 			}
 		});
 		
-		double result = DataUtilities.calculateRowTotal(mockedDependancy, 1000000);
+		double result = DataUtilities.calculateRowTotal(mockedDependancy, Integer.MAX_VALUE);
 		
 		assertEquals(-1.0, result, 000000001d);
 	}
