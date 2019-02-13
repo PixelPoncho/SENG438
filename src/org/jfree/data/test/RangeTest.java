@@ -22,7 +22,7 @@ import org.junit.*;
  * (-5,-5)
  * (100000000000000,100000000000000)
  *
- * @author arebe
+ * &#64;author arebe
  * </pre>
  */
 

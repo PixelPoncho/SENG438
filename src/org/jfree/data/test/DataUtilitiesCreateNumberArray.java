@@ -2,10 +2,10 @@ package org.jfree.data.test;
 
 import static org.junit.Assert.*;
 
-import java.security.InvalidParameterException;
+//import java.security.InvalidParameterException;
 
 import org.jfree.data.DataUtilities;
-import org.jfree.data.Values2D;
+//import org.jfree.data.Values2D;
 import org.jmock.*;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -19,7 +19,11 @@ import org.junit.Test;
  */
 public class DataUtilitiesCreateNumberArray extends DataUtilities {
 	
-	/** The mocking context. */
+	/**
+	 * The mocking context.
+	 *
+	 * 
+	 */
 	// private Mockery mockingContext;
 	
 	/** The mocked dependancy. */
@@ -64,6 +68,9 @@ public class DataUtilitiesCreateNumberArray extends DataUtilities {
 	public void tearDown() throws Exception {
 	}
 	
+	/**
+	 * Creates the number array basic.
+	 */
 	@Test
 	public void createNumberArrayBasic() {
 		double[] testInput = { 2.0, 3.0 };
@@ -74,6 +81,9 @@ public class DataUtilitiesCreateNumberArray extends DataUtilities {
 		assertArrayEquals(testOutput, result);
 	}
 	
+	/**
+	 * Creates the number array null input.
+	 */
 	@Test
 	public void createNumberArrayNullInput() {
 		double[] testInput = {};
@@ -84,6 +94,9 @@ public class DataUtilitiesCreateNumberArray extends DataUtilities {
 		assertArrayEquals(testOutput, result);
 	}
 	
+	/**
+	 * Creates the number array zeros.
+	 */
 	@Test
 	public void createNumberArrayZeros() {
 		double[] testInput = { 0.0, 0.0 };
@@ -94,6 +107,9 @@ public class DataUtilitiesCreateNumberArray extends DataUtilities {
 		assertArrayEquals(testOutput, result);
 	}
 	
+	/**
+	 * Creates the number array one zero.
+	 */
 	@Test
 	public void createNumberArrayOneZero() {
 		double[] testInput = { 0.0 };
@@ -104,6 +120,9 @@ public class DataUtilitiesCreateNumberArray extends DataUtilities {
 		assertArrayEquals(testOutput, result);
 	}
 	
+	/**
+	 * Creates the number array negative.
+	 */
 	@Test
 	public void createNumberArrayNegative() {
 		double[] testInput = { -10.0 };
@@ -114,6 +133,9 @@ public class DataUtilitiesCreateNumberArray extends DataUtilities {
 		assertArrayEquals(testOutput, result);
 	}
 	
+	/**
+	 * Creates the number array some negative.
+	 */
 	@Test
 	public void createNumberArraySomeNegative() {
 		double[] testInput = { -10.0, 3.0, -2.0, 9.0 };
@@ -124,6 +146,9 @@ public class DataUtilitiesCreateNumberArray extends DataUtilities {
 		assertArrayEquals(testOutput, result);
 	}
 	
+	/**
+	 * Creates the number array 2 D basic.
+	 */
 	@Test
 	public void createNumberArray2DBasic() {
 		double[][] testInput = { { 2.0, 3.0 }, { 4.0, 5.0 } };
@@ -135,6 +160,9 @@ public class DataUtilitiesCreateNumberArray extends DataUtilities {
 		assertArrayEquals(testOutput[1], result[1]);
 	}
 	
+	/**
+	 * Creates the number array 2 D negative.
+	 */
 	@Test
 	public void createNumberArray2DNegative() {
 		double[][] testInput = { { -2.0, -3.0 }, { -4.0, -5.0 }, { -6.0, -7.0 } };
@@ -147,6 +175,9 @@ public class DataUtilitiesCreateNumberArray extends DataUtilities {
 		assertArrayEquals(testOutput[2], result[2]);
 	}
 	
+	/**
+	 * Creates the number array 2 D some negative.
+	 */
 	@Test
 	public void createNumberArray2DSomeNegative() {
 		double[][] testInput = { { -2.0, 3.0 }, { -4.0, -5.0 }, { 6.0, 7.0 } };
@@ -159,6 +190,9 @@ public class DataUtilitiesCreateNumberArray extends DataUtilities {
 		assertArrayEquals(testOutput[2], result[2]);
 	}
 	
+	/**
+	 * Creates the number array 2 D zeros.
+	 */
 	@Test
 	public void createNumberArray2DZeros() {
 		double[][] testInput = { { 0.0, 0.0 }, { 0.0, 0.0 } };
@@ -170,6 +204,9 @@ public class DataUtilitiesCreateNumberArray extends DataUtilities {
 		assertArrayEquals(testOutput[1], result[1]);
 	}
 	
+	/**
+	 * Creates the number array 2 D one zero.
+	 */
 	@Test
 	public void createNumberArray2DOneZero() {
 		double[][] testInput = { { 0.0 } };
@@ -181,6 +218,9 @@ public class DataUtilitiesCreateNumberArray extends DataUtilities {
 		// assertArrayEquals(testOutput[1], result[1]);
 	}
 	
+	/**
+	 * Creates the number array 2 D null.
+	 */
 	@Test
 	public void createNumberArray2DNull() {
 		double[][] testInput = { {} };
