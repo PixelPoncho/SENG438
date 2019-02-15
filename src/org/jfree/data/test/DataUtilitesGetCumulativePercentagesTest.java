@@ -50,16 +50,16 @@ import org.junit.Test;
 public class DataUtilitesGetCumulativePercentagesTest extends DataUtilities {
 	
 	/** The mocking context. */
-	private Mockery		mockingContext;
+	// private Mockery mockingContext;
 	
 	/** The mocked dependancy. */
-	DefaultKeyedValues	mockedDependancy;
+	// DefaultKeyedValues mockedDependancy;
 	
 	/** The mocking context. */
-	private Mockery		mockingContext2;
+	// private Mockery mockingContext2;
 	
 	/** The mocked dependancy. */
-	DefaultKeyedValues	mockedDependancy2;
+	// DefaultKeyedValues mockedDependancy2;
 	
 	/**
 	 * Sets the up before class.
@@ -96,11 +96,11 @@ public class DataUtilitesGetCumulativePercentagesTest extends DataUtilities {
 	
 	@Before
 	public void setUp() throws Exception {
-		mockingContext = new Mockery();
-		mockedDependancy = mockingContext.mock(DefaultKeyedValues.class);
+		// mockingContext = new Mockery();
+		// mockedDependancy = mockingContext.mock(DefaultKeyedValues.class);
 		// don't know if need below, but eh...
-		mockingContext2 = new Mockery();
-		mockedDependancy2 = mockingContext2.mock(DefaultKeyedValues.class);
+		// mockingContext2 = new Mockery();
+		// mockedDependancy2 = mockingContext2.mock(DefaultKeyedValues.class);
 	}
 	
 	/**
@@ -171,9 +171,12 @@ public class DataUtilitesGetCumulativePercentagesTest extends DataUtilities {
 		DefaultKeyedValues input = new DefaultKeyedValues();
 		// double i = 0.0;
 		// input.addValue(key, value);
-		input.addValue("0", 0.0);
-		input.addValue("1", -1);
-		input.addValue("2", -4);
+		Number zero = 0.0;
+		Number minOne = -1;
+		Number minFour = -4;
+		input.addValue(0, zero);
+		input.addValue(1, minOne);
+		input.addValue(2, minFour);
 		/*
 		 * mockingContext.checking(new Expectations() { { List myList = new List();
 		 * myList.add("0", 0); myList.add("1", -1); myList.add("1", -1);
@@ -188,11 +191,14 @@ public class DataUtilitesGetCumulativePercentagesTest extends DataUtilities {
 		 * allowing(mockedDependancy).getValue(1); will(returnValue(-1));
 		 * allowing(mockedDependancy).getKeys(); will(returnValue(myList)); } });
 		 */
-		KeyedValues mine = DataUtilities.getCumulativePercentages(mockedDependancy);
+		KeyedValues mine = DataUtilities.getCumulativePercentages(input);
 		DefaultKeyedValues output = new DefaultKeyedValues();
-		output.addValue("0", 0.0);
-		output.addValue("1", .2);
-		output.addValue("2", 1.0);
+		// Number zero = 0.0;
+		Number point2 = .2;
+		Number one = 1;
+		output.addValue(0, zero);
+		output.addValue(1, point2);
+		output.addValue(2, one);
 		/*
 		 * mockingContext2.checking(new Expectations() { { List myList = new List();
 		 * myList.add("0", 0); myList.add("1", 1);
@@ -209,10 +215,14 @@ public class DataUtilitesGetCumulativePercentagesTest extends DataUtilities {
 		 */
 		try {
 			assertEquals(output.getIndex(0), mine.getIndex(0));
-			assertEquals(output.getKeys(), mine.getKeys());
+			// assertArrayEquals(output.getKeys(), mine.getKeys());
 			assertEquals(output.getKey(0), mine.getKey(0));
 			assertEquals(output.getKey(1), mine.getKey(1));
 			assertEquals(output.getKey(2), mine.getKey(2));
+			assertEquals(output.getValue(0), mine.getValue(0));
+			assertEquals(output.getValue(1), mine.getValue(1));
+			assertEquals(output.getValue(2), mine.getValue(2));
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -421,9 +431,13 @@ public class DataUtilitesGetCumulativePercentagesTest extends DataUtilities {
 		DefaultKeyedValues input = new DefaultKeyedValues();
 		// double i = 0.0;
 		// input.addValue(key, value);
-		input.addValue("0", 5);
-		input.addValue("1", 9);
-		input.addValue("2", 2);
+		// double myFive = 5.0;
+		Number five = 5;
+		Number nine = 9;
+		Number two = 9;
+		input.addValue(0, five);
+		input.addValue(1, nine);
+		input.addValue(2, two);
 		/*
 		 * mockingContext.checking(new Expectations() { { List myList = new List();
 		 * myList.add("0", 0); myList.add("1", -1); myList.add("1", -1);
@@ -438,11 +452,14 @@ public class DataUtilitesGetCumulativePercentagesTest extends DataUtilities {
 		 * allowing(mockedDependancy).getValue(1); will(returnValue(-1));
 		 * allowing(mockedDependancy).getKeys(); will(returnValue(myList)); } });
 		 */
-		KeyedValues mine = DataUtilities.getCumulativePercentages(mockedDependancy);
+		KeyedValues mine = DataUtilities.getCumulativePercentages(input);
 		DefaultKeyedValues output = new DefaultKeyedValues();
-		output.addValue("0", 0.3125);
-		output.addValue("1", 0.875);
-		output.addValue("2", 1.0);
+		Number point3 = 0.3125;
+		Number point8 = 0.875;
+		Number one = 1.0;
+		output.addValue(0, point3);
+		output.addValue(1, point8);
+		output.addValue(2, one);
 		/*
 		 * mockingContext2.checking(new Expectations() { { List myList = new List();
 		 * myList.add("0", 0); myList.add("1", 1);
@@ -463,6 +480,9 @@ public class DataUtilitesGetCumulativePercentagesTest extends DataUtilities {
 			assertEquals(output.getKey(0), mine.getKey(0));
 			assertEquals(output.getKey(1), mine.getKey(1));
 			assertEquals(output.getKey(2), mine.getKey(2));
+			assertEquals(output.getValue(0), mine.getValue(0));
+			assertEquals(output.getValue(1), mine.getValue(1));
+			assertEquals(output.getValue(2), mine.getValue(2));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
