@@ -6,7 +6,7 @@ import java.awt.List;
 
 import org.jfree.data.DataUtilities;
 import org.jfree.data.KeyedValues;
-import org.jfree.data.Values2D;
+//import org.jfree.data.Values2D;
 import org.jmock.Expectations;
 import org.jmock.Mockery;
 import org.junit.After;
