@@ -14,13 +14,14 @@ import org.junit.*;
  * The Class RangeTest.
  * 
  * To be able to test any given range, one MUST CHANGE the 2 class variables:
- * upper and lower. Some example ranges: 
- * (0,0) 
+ * upper and lower. Equivalence classes on input are -Double.MAX_VALUE, negative value, 0, positive value, DOUBLE.MAX_VALUE, and null.
+ * Since we are dealing with a range, we have additional equivalence classes of lengths 0, infinite, DOUBLE.MAX_VALUE, positive, and negative. By weak ECT, classes are:
+ * (0,0)
  * (-1,1) 
  * (1,-1)
- * (5,5) 
- * (-5,-5)
- * (100000000000000,100000000000000)
+ * (-Double,MAX_VALUE, 0) 
+ * (- Double.MAX_VALUE, Double.MAX_VALUE)
+ * (NULL, NULL)
  *
  * &#64;author arebe
  * </pre>
@@ -36,10 +37,10 @@ public class RangeTest {
 	private Range	exampleRange;
 	
 	/** The upper. */
-	private double	upper	= 0;
+	private double	upper	= Double.MAX_VALUE;
 	
 	/** The lower. */
-	private double	lower	= 0;
+	private double	lower	= -Double.MAX_VALUE;
 	
 	/**
 	 * Sets the up before class.
@@ -65,9 +66,9 @@ public class RangeTest {
 	 * Central value.
 	 */
 	@Test
-	public void centralValue() {
+	public void centralValueTest() {
 		double centralValue = (upper + lower) / 2;
-		assertEquals("The central value of " + lower + " and " + upper + " should be " + centralValue, centralValue,
+		assertEquals("Getting central value", centralValue,
 				exampleRange.getCentralValue(), .000000001d);
 	}
 	
@@ -77,9 +78,9 @@ public class RangeTest {
 	 * @return the lower bound
 	 */
 	@Test
-	public void getLowerBound() {
+	public void getLowerBoundTest() {
 		// exampleRange = new Range(0,10);
-		assertEquals("The lower bound of  " + lower + " and " + upper + " should be " + lower, lower,
+		assertEquals("Getting lower bound", lower,
 				exampleRange.getLowerBound(), .000000001d);
 	}
 	
@@ -89,9 +90,9 @@ public class RangeTest {
 	 * @return the upper bound
 	 */
 	@Test
-	public void getUpperBound() {
+	public void getUpperBoundTest() {
 		// exampleRange = new Range(0,10);
-		assertEquals("The upper bound of " + lower + " and " + upper + " should be " + upper, upper,
+		assertEquals("Getting upper bound", upper,
 				exampleRange.getUpperBound(), .000000001d);
 	}
 	
@@ -101,12 +102,12 @@ public class RangeTest {
 	 * @return the length
 	 */
 	@Test
-	public void getLength() {
+	public void getLengthTest() {
 		// exampleRange = new Range(0,10);
 		// double absUpper = Math.abs(upper);
 		// double absLower = Math.abs(lower);
 		double myCalcLength = upper - lower;
-		assertEquals("The length value of " + lower + " and " + upper + " should be " + myCalcLength, myCalcLength,
+		assertEquals("Getting length", myCalcLength,
 				exampleRange.getUpperBound(), .000000001d);
 	}
 	
@@ -117,7 +118,7 @@ public class RangeTest {
 	public void containsBLB() {
 		// exampleRange = new Range(0,10);
 		double BLB = lower - 1;
-		assertFalse("range " + lower + " and " + upper + " should NOT contain " + BLB, exampleRange.contains(BLB));
+		assertFalse("Contains() on lower - 1", exampleRange.contains(BLB));
 	}
 	
 	/**
@@ -127,7 +128,7 @@ public class RangeTest {
 	public void containsLB() {
 		// exampleRange = new Range(0,10);
 		double LB = lower;
-		assertTrue("range " + lower + " and " + upper + " should contain " + LB, exampleRange.contains(LB));
+		assertTrue("Contains() on lower", exampleRange.contains(LB));
 	}
 	
 	/**
@@ -137,7 +138,7 @@ public class RangeTest {
 	public void containsAUB() {
 		// exampleRange = new Range(0,10);
 		double AUB = upper + 1;
-		assertFalse("range " + lower + " and " + upper + " should NOT contain " + AUB, exampleRange.contains(AUB));
+		assertFalse("Contains on upper + 1", exampleRange.contains(AUB));
 	}
 	
 	/**
@@ -147,17 +148,17 @@ public class RangeTest {
 	public void containsUB() {
 		// exampleRange = new Range(0,10);
 		double UB = upper;
-		assertTrue("range " + lower + " and " + upper + " should contain " + UB, exampleRange.contains(UB));
+		assertTrue("Contains on upper", exampleRange.contains(UB));
 	}
 	
 	/**
 	 * Contains my central.
 	 */
 	@Test
-	public void containsMyCentral() {
+	public void containsCentral() {
 		// exampleRange = new Range(0,10);
-		double centralValue = (upper + lower) / 2; // not using inbuilt cntralvalue because reasons
-		assertTrue("range " + lower + " and " + upper + " should contain " + centralValue,
+		double centralValue = (upper + lower) / 2; 
+		assertTrue("Contains() on central value",
 				exampleRange.contains(centralValue));
 	}
 	
@@ -165,10 +166,10 @@ public class RangeTest {
 	 * Constrains my central.
 	 */
 	@Test
-	public void constrainsMyCentral() {
+	public void constrainsCentral() {
 		// exampleRange = new Range(0,10);
 		double centralValue = (upper + lower) / 2; // not using inbuilt cntralvalue because reasons
-		assertEquals("range " + lower + " and " + upper + " should constrain " + centralValue, centralValue,
+		assertEquals("Constrains() on central value", centralValue,
 				exampleRange.constrain(centralValue), .000000001d);
 	}
 	
@@ -179,7 +180,7 @@ public class RangeTest {
 	public void constrainsBLB() {
 		// exampleRange = new Range(0,10);
 		double BLB = lower - 1;
-		assertEquals("range " + lower + " and " + upper + " should constrain " + BLB + " to " + lower, lower,
+		assertEquals("Constrains() on lower - 1", lower,
 				exampleRange.constrain(BLB), .000000001d);
 	}
 	
@@ -190,7 +191,7 @@ public class RangeTest {
 	public void constrainsLB() {
 		// exampleRange = new Range(0,10);
 		double LB = lower;
-		assertEquals("range " + lower + " and " + upper + " should constrain " + LB + " to " + lower, lower,
+		assertEquals("Constrains on lower", lower,
 				exampleRange.constrain(LB), .000000001d);
 	}
 	
@@ -201,7 +202,7 @@ public class RangeTest {
 	public void constrainsAUB() {
 		// exampleRange = new Range(0,10);
 		double AUB = upper + 1;
-		assertEquals("range " + lower + " and " + upper + " should constrain " + AUB + " to " + upper, upper,
+		assertEquals("Constrains() on upper + 1", upper,
 				exampleRange.constrain(AUB), .000000001d);
 	}
 	
@@ -212,7 +213,7 @@ public class RangeTest {
 	public void constrainsUB() {
 		// exampleRange = new Range(0,10);
 		double UB = upper;
-		assertEquals("range " + lower + " and " + upper + " should constrain " + UB + " to " + upper, upper,
+		assertEquals("Constrains on upper", upper,
 				exampleRange.constrain(UB), .000000001d);
 	}
 	
