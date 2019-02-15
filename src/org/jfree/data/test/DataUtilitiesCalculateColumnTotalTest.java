@@ -143,10 +143,6 @@ public class DataUtilitiesCalculateColumnTotalTest extends DataUtilities {
 				one(mockedDependancy).getRowCount();
 				will(returnValue(2));
 				one(mockedDependancy).getValue(0, -1);
-				// This seems redundant. Is there a correct way to mock this? What are we even
-				// testing for at this point?
-				// It seems like all we are testing is that the -1 gets passed to the .getValue
-				// method properly
 				will(throwException(new IndexOutOfBoundsException()));
 				one(mockedDependancy).getValue(1, -1);
 				will(returnValue(2.5));

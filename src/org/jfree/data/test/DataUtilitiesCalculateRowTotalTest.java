@@ -73,7 +73,6 @@ public class DataUtilitiesCalculateRowTotalTest extends DataUtilities {
 	@Test
 	public void calculateRowTotalOneNullValue() {
 		mockingContext.checking(new Expectations() {
-
 			{
 				one(mockedDependancy).getColumnCount();
 				will(returnValue(2));
