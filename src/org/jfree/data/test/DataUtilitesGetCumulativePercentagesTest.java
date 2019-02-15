@@ -15,7 +15,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * <pre>
@@ -48,13 +47,19 @@ import org.junit.Test;
  * </pre>
  */
 public class DataUtilitesGetCumulativePercentagesTest extends DataUtilities {
-
+	
 	/** The mocking context. */
 	private Mockery	mockingContext;
-
+	
 	/** The mocked dependancy. */
 	KeyedValues		mockedDependancy;
-
+	
+	/** The mocking context. */
+	private Mockery	mockingContext2;
+	
+	/** The mocked dependancy. */
+	KeyedValues		mockedDependancy2;
+	
 	/**
 	 * Sets the up before class.
 	 *
@@ -63,7 +68,7 @@ public class DataUtilitesGetCumulativePercentagesTest extends DataUtilities {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
-
+	
 	/**
 	 * Tear down after class.
 	 *
@@ -72,20 +77,29 @@ public class DataUtilitesGetCumulativePercentagesTest extends DataUtilities {
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 	}
-
+	
 	/**
-	 * Sets the up.
-	 *
+	 * Sets the up. METHODS TO SIMULATE:
+	 * 
+	 * // int getIndex(java.lang.Comparable) // java.util.List getKeys() //
+	 * java.lang.Comparable getKey(int) // java.lang.Number
+	 * getValue(java.lang.Comparable
+	 * 
+	 * // Methods inherited from interface :org.jfree.data.Values // getItemCount,
+	 * getValue
+	 * 
 	 * @throws Exception the exception
 	 */
-
+	
 	@Before
 	public void setUp() throws Exception {
 		mockingContext = new Mockery();
 		mockedDependancy = mockingContext.mock(KeyedValues.class);
+		// don't know if need below, but eh...
+		mockingContext2 = new Mockery();
+		mockedDependancy2 = mockingContext2.mock(KeyedValues.class);
 	}
-
-
+	
 	/**
 	 * Tear down.
 	 *
@@ -94,36 +108,54 @@ public class DataUtilitesGetCumulativePercentagesTest extends DataUtilities {
 	@After
 	public void tearDown() throws Exception {
 	}
-
+	
 	/**
 	 * Gets the cumulative percentage test empty list.
-	 *
+	 * 
+	 * WARNING: ACTUAL RESULTS UNPREDICTABLE!!!
+	 * 
 	 * @return the cumulative percentage test empty list
 	 */
 	@Test
 	public void getCumulativePercentageTestEmptyList() {
-		// METHODS TO SIMULATE:
-		// int getIndex(java.lang.Comparable)
-		// java.util.List getKeys()
-		// java.lang.Comparable getKey(int)
-		// java.lang.Number getValue(java.lang.Comparable
+		/*
+		 * Input: (0,?)
+		 * 
+		 * Output: (0,?)
+		 */
 		mockingContext.checking(new Expectations() {
 			{
-				one(mockedDependancy).getIndex(0);
+				allowing(mockedDependancy).getIndex(0);
 				will(returnValue(-1)); // Will throw java.lang.IndexOutOfBoundsException
-				one(mockedDependancy).getKeys();
+				allowing(mockedDependancy).getKeys();
 				will(returnValue(new List()));
-				one(mockedDependancy).getKey(0);
+				allowing(mockedDependancy).getKey(0);
 				will(returnValue(null));
-				one(mockedDependancy).getValue(0);
+				allowing(mockedDependancy).getValue(0);
 				will(returnValue(null));
 			}
 		});
 		KeyedValues mine = DataUtilities.getCumulativePercentages(mockedDependancy);
-
+		
+		mockingContext2.checking(new Expectations() {
+			{
+				allowing(mockedDependancy2).getIndex(0);
+				will(returnValue(-1)); // Will throw java.lang.IndexOutOfBoundsException
+				allowing(mockedDependancy2).getKeys();
+				will(returnValue(new List()));
+				allowing(mockedDependancy2).getKey(0);
+				will(returnValue(null));
+				allowing(mockedDependancy2).getValue(0);
+				will(returnValue(null));
+			}
+		});
+		
+		assertEquals(mockedDependancy.getIndex(0), mine.getIndex(0));
+		assertEquals(mockedDependancy.getKeys(), mine.getKeys());
+		assertEquals(mockedDependancy.getKey(0), mine.getKey(0));
+		assertEquals(mockedDependancy.getValue(0), mine.getValue(0));
 	}
-
-
+	
 	/**
 	 * Gets the cumulative percentage test negative values.
 	 *
@@ -131,27 +163,44 @@ public class DataUtilitesGetCumulativePercentagesTest extends DataUtilities {
 	 */
 	@Test
 	public void getCumulativePercentageTestNegativeValues() {
-		//METHODS TO SIMULATE:
-			//int getIndex(java.lang.Comparable)
-			//java.util.List getKeys()
-			//java.lang.Comparable getKey(int)
-			//java.lang.Number getValue(java.lang.Comparable
-
-			//Methods inherited from interface :org.jfree.data.Values
-			//getItemCount, getValue
-		mockingContext.checking( new Expectations() {
+		/*
+		 * Input: (0,0) (1,1) (2,2) (3,3)
+		 * 
+		 * Output: (0,0) (1,1) (2,2) (3,3)
+		 */
+		mockingContext.checking(new Expectations() {
 			{
-				one(mockedDependancy).getIndex();
-				will(returnValue());
-				one(mockedDependancy).getKeys();
-				will(returnValue());
-				one(mockedDependancy).getKey();
-				will(returnValue());
-				one(mockedDependancy).getValue();
+				allowing(mockedDependancy).getIndex(0);
+				will(returnValue(-1)); // Will throw java.lang.IndexOutOfBoundsException
+				allowing(mockedDependancy).getKeys();
+				will(returnValue(new List()));
+				allowing(mockedDependancy).getKey(0);
+				will(returnValue(null));
+				allowing(mockedDependancy).getValue(0);
+				will(returnValue(null));
 			}
 		});
+		KeyedValues mine = DataUtilities.getCumulativePercentages(mockedDependancy);
+		
+		mockingContext2.checking(new Expectations() {
+			{
+				allowing(mockedDependancy2).getIndex(0);
+				will(returnValue(-1)); // Will throw java.lang.IndexOutOfBoundsException
+				allowing(mockedDependancy2).getKeys();
+				will(returnValue(new List()));
+				allowing(mockedDependancy2).getKey(0);
+				will(returnValue(null));
+				allowing(mockedDependancy2).getValue(0);
+				will(returnValue(null));
+			}
+		});
+		
+		assertEquals(mockedDependancy.getIndex(0), mine.getIndex(0));
+		assertEquals(mockedDependancy.getKeys(), mine.getKeys());
+		assertEquals(mockedDependancy.getKey(0), mine.getKey(0));
+		assertEquals(mockedDependancy.getValue(0), mine.getValue(0));
 	}
-
+	
 	/**
 	 * Gets the cumulative percentage test null values.
 	 *
@@ -159,73 +208,127 @@ public class DataUtilitesGetCumulativePercentagesTest extends DataUtilities {
 	 */
 	@Test
 	public void getCumulativePercentageTestNullValues() {
-		//METHODS TO SIMULATE:
-			//int getIndex(java.lang.Comparable key)
-			//java.util.List getKeys()
-			//java.lang.Comparable getKey(int index)
-			//java.lang.Number getValue(java.lang.Comparable key)
-		mockingContext.checking( new Expectations() {
+		/*
+		 * (0,0) (1,1) (2,2) (3,3)
+		 */
+		mockingContext.checking(new Expectations() {
 			{
-				one(mockedDependancy).getIndex();
-				will(returnValue());
-				one(mockedDependancy).getKeys();
-				will(returnValue());
-				one(mockedDependancy).getKey();
-				will(returnValue());
-				one(mockedDependancy).getValue();
+				allowing(mockedDependancy).getIndex(0);
+				will(returnValue(-1)); // Will throw java.lang.IndexOutOfBoundsException
+				allowing(mockedDependancy).getKeys();
+				will(returnValue(new List()));
+				allowing(mockedDependancy).getKey(0);
+				will(returnValue(null));
+				allowing(mockedDependancy).getValue(0);
+				will(returnValue(null));
 			}
 		});
+		KeyedValues mine = DataUtilities.getCumulativePercentages(mockedDependancy);
+		
+		mockingContext2.checking(new Expectations() {
+			{
+				allowing(mockedDependancy2).getIndex(0);
+				will(returnValue(-1)); // Will throw java.lang.IndexOutOfBoundsException
+				allowing(mockedDependancy2).getKeys();
+				will(returnValue(new List()));
+				allowing(mockedDependancy2).getKey(0);
+				will(returnValue(null));
+				allowing(mockedDependancy2).getValue(0);
+				will(returnValue(null));
+			}
+		});
+		
+		assertEquals(mockedDependancy.getIndex(0), mine.getIndex(0));
+		assertEquals(mockedDependancy.getKeys(), mine.getKeys());
+		assertEquals(mockedDependancy.getKey(0), mine.getKey(0));
+		assertEquals(mockedDependancy.getValue(0), mine.getValue(0));
 	}
-
+	
 	/**
 	 * Gets the cumulative percentage test non numeric.
 	 *
 	 * @return the cumulative percentage test non numeric
 	 */
-
+	
 	@Test
 	public void getCumulativePercentageTestNonNumeric() {
-		//METHODS TO SIMULATE:
-			//int getIndex(java.lang.Comparable)
-			//java.util.List getKeys()
-			//java.lang.Comparable getKey(int)
-			//java.lang.Number getValue(java.lang.Comparable
-		mockingContext.checking( new Expectations() {
+		/*
+		 * (0,0) (1,1) (2,2) (3,3)
+		 */
+		mockingContext.checking(new Expectations() {
 			{
-				one(mockedDependancy).getIndex();
-				will(returnValue());
-				one(mockedDependancy).getKeys();
-				will(returnValue());
-				one(mockedDependancy).getKey();
-				will(returnValue());
-				one(mockedDependancy).getValue();
+				allowing(mockedDependancy).getIndex(0);
+				will(returnValue(-1)); // Will throw java.lang.IndexOutOfBoundsException
+				allowing(mockedDependancy).getKeys();
+				will(returnValue(new List()));
+				allowing(mockedDependancy).getKey(0);
+				will(returnValue(null));
+				allowing(mockedDependancy).getValue(0);
+				will(returnValue(null));
 			}
 		});
+		KeyedValues mine = DataUtilities.getCumulativePercentages(mockedDependancy);
+		
+		mockingContext2.checking(new Expectations() {
+			{
+				allowing(mockedDependancy2).getIndex(0);
+				will(returnValue(-1)); // Will throw java.lang.IndexOutOfBoundsException
+				allowing(mockedDependancy2).getKeys();
+				will(returnValue(new List()));
+				allowing(mockedDependancy2).getKey(0);
+				will(returnValue(null));
+				allowing(mockedDependancy2).getValue(0);
+				will(returnValue(null));
+			}
+		});
+		
+		assertEquals(mockedDependancy.getIndex(0), mine.getIndex(0));
+		assertEquals(mockedDependancy.getKeys(), mine.getKeys());
+		assertEquals(mockedDependancy.getKey(0), mine.getKey(0));
+		assertEquals(mockedDependancy.getValue(0), mine.getValue(0));
 	}
-
+	
 	/**
 	 * Gets the cumulative percentage test expected values.
 	 *
 	 * @return the cumulative percentage test expected values
 	 */
-
+	
 	@Test
 	public void getCumulativePercentageTestExpectedValues() {
-		//METHODS TO SIMULATE:
-			//int getIndex(java.lang.Comparable)
-			//java.util.List getKeys()
-			//java.lang.Comparable getKey(int)
-			//java.lang.Number getValue(java.lang.Comparable)
-		mockingContext.checking( new Expectations() {
+		/*
+		 * (0,0) (1,1) (2,2) (3,3)
+		 */
+		mockingContext.checking(new Expectations() {
 			{
-				one(mockedDependancy).getIndex();
-				will(returnValue());
-				one(mockedDependancy).getKeys();
-				will(returnValue());
-				one(mockedDependancy).getKey();
-				will(returnValue());
-				one(mockedDependancy).getValue();
+				allowing(mockedDependancy).getIndex(0);
+				will(returnValue(-1)); // Will throw java.lang.IndexOutOfBoundsException
+				allowing(mockedDependancy).getKeys();
+				will(returnValue(new List()));
+				allowing(mockedDependancy).getKey(0);
+				will(returnValue(null));
+				allowing(mockedDependancy).getValue(0);
+				will(returnValue(null));
 			}
 		});
+		KeyedValues mine = DataUtilities.getCumulativePercentages(mockedDependancy);
+		
+		mockingContext2.checking(new Expectations() {
+			{
+				allowing(mockedDependancy2).getIndex(0);
+				will(returnValue(-1)); // Will throw java.lang.IndexOutOfBoundsException
+				allowing(mockedDependancy2).getKeys();
+				will(returnValue(new List()));
+				allowing(mockedDependancy2).getKey(0);
+				will(returnValue(null));
+				allowing(mockedDependancy2).getValue(0);
+				will(returnValue(null));
+			}
+		});
+		
+		assertEquals(mockedDependancy.getIndex(0), mine.getIndex(0));
+		assertEquals(mockedDependancy.getKeys(), mine.getKeys());
+		assertEquals(mockedDependancy.getKey(0), mine.getKey(0));
+		assertEquals(mockedDependancy.getValue(0), mine.getValue(0));
 	}
 }
