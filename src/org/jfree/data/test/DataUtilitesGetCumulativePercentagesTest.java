@@ -99,23 +99,25 @@ public class DataUtilitesGetCumulativePercentagesTest extends DataUtilities {
 	 */
 	@Test
 	public void getCumulativePercentageTestEmptyList() {
-		//METHODS TO SIMULATE:
-			//int getIndex(java.lang.Comparable)
-			//java.util.List getKeys()
-			//java.lang.Comparable getKey(int)
-			//java.lang.Number getValue(java.lang.Comparable
-		mockingContext.checking( new Expectations() {
+		// METHODS TO SIMULATE:
+		// int getIndex(java.lang.Comparable)
+		// java.util.List getKeys()
+		// java.lang.Comparable getKey(int)
+		// java.lang.Number getValue(java.lang.Comparable
+		mockingContext.checking(new Expectations() {
 			{
-				one(mockedDependancy).getIndex(any(Comparable));
-				will(returnValue(-1)); //Will throw java.lang.IndexOutOfBoundsException
+				one(mockedDependancy).getIndex(0);
+				will(returnValue(-1)); // Will throw java.lang.IndexOutOfBoundsException
 				one(mockedDependancy).getKeys();
-				will(returnValue(new List());
-				one(mockedDependancy).getKey();
+				will(returnValue(new List()));
+				one(mockedDependancy).getKey(0);
 				will(returnValue(null));
-				one(mockedDependancy).getValue();
+				one(mockedDependancy).getValue(0);
 				will(returnValue(null));
 			}
 		});
+		KeyedValues mine = DataUtilities.getCumulativePercentages(mockedDependancy);
+		
 	}
 	
 	/**
