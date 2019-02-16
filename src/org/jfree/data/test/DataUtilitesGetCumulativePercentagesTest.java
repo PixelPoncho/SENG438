@@ -434,7 +434,7 @@ public class DataUtilitesGetCumulativePercentagesTest extends DataUtilities {
 		// double myFive = 5.0;
 		Number five = 5;
 		Number nine = 9;
-		Number two = 9;
+		Number two = 2;
 		input.addValue(0, five);
 		input.addValue(1, nine);
 		input.addValue(2, two);
