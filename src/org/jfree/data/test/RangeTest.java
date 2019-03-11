@@ -235,6 +235,8 @@ public class RangeTest {
 	public static void tearDownAfterClass() throws Exception {
 	}
 	
+	/*NEW TESTS*/
+	
 	/*
 	 * Creates Range with lower bound larger than upper
 	 * */
