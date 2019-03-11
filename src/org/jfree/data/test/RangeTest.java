@@ -235,4 +235,15 @@ public class RangeTest {
 	public static void tearDownAfterClass() throws Exception {
 	}
 	
+	/*
+	 * Creates Range with lower bound larger than upper
+	 * */
+	@Test(expected=IllegalArgumentException.class)
+	public void rangeWithLowerGreaterThanUpper() {
+		double lower = 10;
+		double upper = 0;
+		Range illigalRange = new Range(lower, upper);
+		
+	}
+	
 }
