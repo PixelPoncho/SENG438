@@ -2,6 +2,8 @@ package org.jfree.data.test;
 
 import static org.junit.Assert.*;
 
+import java.security.InvalidParameterException;
+
 //import java.security.InvalidParameterException;
 
 import org.jfree.data.DataUtilities;
@@ -231,5 +233,7 @@ public class DataUtilitiesCreateNumberArray extends DataUtilities {
 		assertArrayEquals(testOutput[0], result[0]);
 	}
 	// @Test(expected = InvalidParameterException.class)
+	
+
 	
 }
