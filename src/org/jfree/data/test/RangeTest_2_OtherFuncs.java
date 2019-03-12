@@ -70,9 +70,7 @@ public class RangeTest_2_OtherFuncs {
 	
 	//////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////
-	/**
-	 * Intersects test.
-	 */
+	
 	@Test
 	public void intersects_same_Test() {
 		// 152 true
@@ -180,9 +178,7 @@ public class RangeTest_2_OtherFuncs {
 	
 	//////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////
-	/**
-	 * constrain test.
-	 */
+	
 	@Test
 	public void constrain_containts_Test() {
 		// 171 false
@@ -292,19 +288,93 @@ public class RangeTest_2_OtherFuncs {
 	
 	//////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////
-	/**
-	 * Expand to include test.
-	 */
+	
 	@Test
-	public void expandToIncludeTest() {
-		
+	public void expandToInclude_rangeNull_Test() {
+		// 226 true
+		Range range = null;
+		double value = 10;
+		Range result = Range.expandToInclude(range, value);
+		assertEquals("null expanding to include 10 should return (10,10). Lower bound should be 10.", 10,
+				result.getLowerBound(), .000000001d);
+		assertEquals("null expanding to include 10 should return (10,10). Upper bound should be 10.", 10,
+				result.getUpperBound(), .000000001d);
+	}
+	
+	@Test
+	public void expandToInclude_smallerLower_Test() {
+		// 226 false
+		// 229 true
+		Range range = new Range(-5, 5);
+		double value = -10;
+		Range result = Range.expandToInclude(range, value);
+		assertEquals("(-5,5) expanding to include -10 should return (-10,5). Lower bound should be -10.", -10,
+				result.getLowerBound(), .000000001d);
+		assertEquals("(-5,5) expanding to include -10 should return (-10,5). Upper bound should be 5.", 5,
+				result.getUpperBound(), .000000001d);
+	}
+	
+	@Test
+	public void expandToInclude_biggerUpper_Test() {
+		// 226 false
+		// 229 false
+		// 232 true
+		Range range = new Range(-5, 5);
+		double value = 10;
+		Range result = Range.expandToInclude(range, value);
+		assertEquals("(-5,5) expanding to include 10 should return (-5,10). Lower bound should be -5.", -5,
+				result.getLowerBound(), .000000001d);
+		assertEquals("(-5,5) expanding to include 10 should return (-5,10). Upper bound should be 10.", 10,
+				result.getUpperBound(), .000000001d);
+	}
+	
+	@Test
+	public void expandToInclude_contained_Test() {
+		// 226 false
+		// 229 false
+		// 232 false
+		Range range = new Range(-5, 5);
+		double value = 0;
+		Range result = Range.expandToInclude(range, value);
+		assertEquals("(-5,5) expanding to include 0 should return (-5,5). Lower bound should be -5.", -5,
+				result.getLowerBound(), .000000001d);
+		assertEquals("(-5,5) expanding to include 0 should return (-5,5). Upper bound should be 5.", 5,
+				result.getUpperBound(), .000000001d);
+	}
+	//////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void expand_nullRange_Test() {
+		// 254 true
+		Range range = null;
+		double lowerMargin = 0;
+		double upperMargin = 0;
+		Range result = Range.expand(range, lowerMargin, upperMargin); // should throw exception
+		/*
+		 * assertEquals("(-5,5) expanding to include 0 should return (-5,5). Lower bound should be -5."
+		 * , -5, result.getLowerBound(), .000000001d);
+		 * assertEquals("(-5,5) expanding to include 0 should return (-5,5). Upper bound should be 5."
+		 * , 5, result.getUpperBound(), .000000001d);
+		 */
+	}
+	
+	@Test
+	public void expand_Good_Test() {
+		// 254 false
+		// For example: expand(new Range(2, 6), 0.25, 0.5) returns a range from 1 to 8.
+		Range range = new Range(2, 6);
+		double lowerMargin = 0.25;
+		double upperMargin = 0.5;
+		Range result = Range.expand(range, lowerMargin, upperMargin);
+		assertEquals("expand(new Range(2, 6), 0.25, 0.5) returns a range from 1 to 8. Lower bound should be 1.", 1,
+				result.getLowerBound(), .000000001d);
+		assertEquals("expand(new Range(2, 6), 0.25, 0.5) returns a range from 1 to 8. Upper bound should be 8.", 8,
+				result.getUpperBound(), .000000001d);
 	}
 	
 	//////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////
-	/**
-	 * Shift 2 inputs test.
-	 */
 	@Test
 	public void shift2InputsTest() {
 		
@@ -312,9 +382,7 @@ public class RangeTest_2_OtherFuncs {
 	
 	//////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////
-	/**
-	 * Shift 3 inputs test.
-	 */
+	
 	@Test
 	public void shift3InputsTest() {
 		
@@ -322,9 +390,7 @@ public class RangeTest_2_OtherFuncs {
 	
 	//////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////
-	/**
-	 * Shift with no zero crossing test.
-	 */
+	
 	@Test
 	public void shiftWithNoZeroCrossingTest() {
 		
