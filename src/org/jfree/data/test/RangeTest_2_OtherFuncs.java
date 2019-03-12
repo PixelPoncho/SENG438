@@ -181,10 +181,112 @@ public class RangeTest_2_OtherFuncs {
 	//////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////
 	/**
-	 * Combine test.
+	 * constrain test.
 	 */
 	@Test
-	public void combineTest() {
+	public void constrain_containts_Test() {
+		// 171 false
+		Range myRange = new Range(-5, 5);
+		double constrains = myRange.constrain(0);
+		// assertEquals(message, expected, actual);
+		assertEquals("(-5,5) should constrain 0 to 0", 0, constrains, .000000001d);
+	}
+	
+	/**
+	 * constrain larger than upper test.
+	 */
+	@Test
+	public void constrain_largerThanUpper_Test() {
+		// 171 true
+		// 172 true
+		Range myRange = new Range(-5, 5);
+		double constrains = myRange.constrain(10);
+		// assertEquals(message, expected, actual);
+		assertEquals("(-5,5) should constrain 10 to 5", 5, constrains, .000000001d);
+	}
+	
+	/**
+	 * constrain smaller than lower test.
+	 */
+	@Test
+	public void constrain_smallerThanLower_Test() {
+		// 171 true
+		// 172 false
+		// 175 true
+		Range myRange = new Range(-5, 5);
+		double constrains = myRange.constrain(-10);
+		// assertEquals(message, expected, actual);
+		assertEquals("(-5,5) should constrain -10 to -5", -5, constrains, .000000001d);
+	}
+	
+	/**
+	 * constrain lower bound test. TODO: NO WAY TO GET LAST DECISION PATH!!!
+	 */
+	@Test
+	public void constrain_lowerBound_Test() {
+		// 171 true??
+		// 172 false
+		// 175 hopefully False
+		Range myRange = new Range(-5, 5);
+		double constrains = myRange.constrain(-5);
+		// assertEquals(message, expected, actual);
+		assertEquals("(-5,5) should constrain -5 to -5", -5, constrains, .000000001d);
+	}
+	//////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////
+	
+	/*
+	 * TODO: note that CANNOT test combine without using getLowerBound or
+	 * getUpperBound. Sorry, I don't wanna learn reflection right now.
+	 */
+	
+	/**
+	 * Combine first null test.
+	 */
+	@Test
+	public void combine_firstNull_Test() {
+		// 199 true
+		Range range1 = null;
+		Range range2 = new Range(-5, 5);
+		Range result = Range.combine(range1, range2);
+		assertEquals("null and (-5,5) should combine to (-5,5). Lower bound should be -5.", -5, result.getLowerBound(),
+				.000000001d);
+		assertEquals("null and (-5,5) should combine to (-5,5). Upper bound should be 5.", 5, result.getUpperBound(),
+				.000000001d);
+		
+	}
+	
+	/**
+	 * Combine second null test.
+	 */
+	@Test
+	public void combine_secondNull_Test() {
+		// 199 false
+		// 203 true
+		Range range1 = new Range(-5, 5);
+		Range range2 = null;
+		Range result = Range.combine(range1, range2);
+		assertEquals("(-5,5) and null should combine to (-5,5). Lower bound should be -5.", -5, result.getLowerBound(),
+				.000000001d);
+		assertEquals("(-5,5) and null should combine to (-5,5). Upper bound should be 5.", 5, result.getUpperBound(),
+				.000000001d);
+		
+	}
+	
+	/**
+	 * Combine both not null test.
+	 */
+	@Test
+	public void combine_bothNotNull_Test() {
+		// 199 false
+		// 203 false
+		Range range1 = new Range(-5, 5);
+		Range range2 = new Range(10, 20);
+		Range result = Range.combine(range1, range2);
+		assertEquals("(-5,5) and (10, 20) should combine to (-5,20). Lower bound should be -5.", -5,
+				result.getLowerBound(), .000000001d);
+		assertEquals("(-5,5) and (10, 20) should combine to (-5,20). Upper bound should be 20.", 20,
+				result.getUpperBound(), .000000001d);
 		
 	}
 	
