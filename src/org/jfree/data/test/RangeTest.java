@@ -108,7 +108,7 @@ public class RangeTest {
 		// double absLower = Math.abs(lower);
 		double myCalcLength = upper - lower;
 		assertEquals("Getting length", myCalcLength,
-				exampleRange.getUpperBound(), .000000001d);
+				exampleRange.getLength(), .000000001d);
 	}
 	
 	/**
