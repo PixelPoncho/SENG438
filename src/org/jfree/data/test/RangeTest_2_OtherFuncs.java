@@ -71,6 +71,9 @@ public class RangeTest_2_OtherFuncs {
 	//////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////
 	
+	/**
+	 * Intersects same test.
+	 */
 	@Test
 	public void intersects_same_Test() {
 		// 152 true
@@ -179,6 +182,9 @@ public class RangeTest_2_OtherFuncs {
 	//////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////
 	
+	/**
+	 * Constrain containts test.
+	 */
 	@Test
 	public void constrain_containts_Test() {
 		// 171 false
@@ -289,6 +295,9 @@ public class RangeTest_2_OtherFuncs {
 	//////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////
 	
+	/**
+	 * Expand to include range null test.
+	 */
 	@Test
 	public void expandToInclude_rangeNull_Test() {
 		// 226 true
@@ -301,6 +310,9 @@ public class RangeTest_2_OtherFuncs {
 				result.getUpperBound(), .000000001d);
 	}
 	
+	/**
+	 * Expand to include smaller lower test.
+	 */
 	@Test
 	public void expandToInclude_smallerLower_Test() {
 		// 226 false
@@ -314,6 +326,9 @@ public class RangeTest_2_OtherFuncs {
 				result.getUpperBound(), .000000001d);
 	}
 	
+	/**
+	 * Expand to include bigger upper test.
+	 */
 	@Test
 	public void expandToInclude_biggerUpper_Test() {
 		// 226 false
@@ -328,6 +343,9 @@ public class RangeTest_2_OtherFuncs {
 				result.getUpperBound(), .000000001d);
 	}
 	
+	/**
+	 * Expand to include contained test.
+	 */
 	@Test
 	public void expandToInclude_contained_Test() {
 		// 226 false
@@ -344,6 +362,9 @@ public class RangeTest_2_OtherFuncs {
 	//////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////
 	
+	/**
+	 * Expand null range test.
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void expand_nullRange_Test() {
 		// 254 true
@@ -359,6 +380,9 @@ public class RangeTest_2_OtherFuncs {
 		 */
 	}
 	
+	/**
+	 * Expand good test.
+	 */
 	@Test
 	public void expand_Good_Test() {
 		// 254 false
@@ -375,55 +399,197 @@ public class RangeTest_2_OtherFuncs {
 	
 	//////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////
-	@Test
-	public void shift2InputsTest() {
-		
-	}
 	
-	//////////////////////////////////////////////////////////////////////
-	//////////////////////////////////////////////////////////////////////
-	
-	@Test
-	public void shift3InputsTest() {
-		
-	}
-	
-	//////////////////////////////////////////////////////////////////////
-	//////////////////////////////////////////////////////////////////////
-	
-	@Test
-	public void shiftWithNoZeroCrossingTest() {
-		
-	}
-	
-	//////////////////////////////////////////////////////////////////////
-	//////////////////////////////////////////////////////////////////////
 	/**
-	 * Equals test.
+	 * Shift 2 inputs not allow crossing test.
 	 */
 	@Test
-	public void equalsTest() {
-		
+	public void shift_2Inputs_notAllowCrossing_Test() {
+		Range base = new Range(-5, 5);
+		double delta = 1;
+		Range result = Range.shift(base, delta);
+		assertEquals("(-5,5) shifted by 1 should return (-4,6). Lower bound should be -4.", -4, result.getLowerBound(),
+				.000000001d);
+		assertEquals("(-5,5) shifted by 1 should return (-4,6). Upper bound should be 6.", 6, result.getUpperBound(),
+				.000000001d);
 	}
 	
 	//////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////
+	
+	/**
+	 * Shift 3 inputs allow crossing test.
+	 */
+	@Test
+	public void shift_3Inputs_allowCrossing_Test() {
+		Range base = new Range(-5, 5);
+		double delta = 10;
+		Range result = Range.shift(base, delta, true);
+		assertEquals("(-5,5) shifted by 10 and zero crossing should return (5,15). Lower bound should be 5.", 5,
+				result.getLowerBound(), .000000001d);
+		assertEquals("(-5,5) shifted by 10 and zero crossing should return (5,15). Upper bound should be 15.", 15,
+				result.getUpperBound(), .000000001d);
+	}
+	
+	/**
+	 * Shift 3 inputs allow crossing negative test.
+	 */
+	@Test
+	public void shift_3Inputs_allowCrossing_negative_Test() {
+		Range base = new Range(-5, 5);
+		double delta = -10;
+		Range result = Range.shift(base, delta, true);
+		assertEquals("(-5,5) shifted by -10 and zero crossing should return (-15,-5). Lower bound should be -15.", -15,
+				result.getLowerBound(), .000000001d);
+		assertEquals("(-5,5) shifted by -10 and zero crossing should return (-15,-5). Upper bound should be -5.", -5,
+				result.getUpperBound(), .000000001d);
+	}
+	
+	/**
+	 * Shift 3 inputs not allow crossing neg to pos test.
+	 */
+	@Test
+	public void shift_3Inputs_notAllowCrossing_negToPos_Test() {
+		Range base = new Range(-5, 5);
+		double delta = 10;
+		Range result = Range.shift(base, delta, false);
+		assertEquals("(-5,5) shifted by 10 and NO zero crossing should return (0,15). Lower bound should be 0.", 0,
+				result.getLowerBound(), .000000001d);
+		assertEquals("(-5,5) shifted by 10 and NO zero crossing should return (0,15). Upper bound should be 15.", 15,
+				result.getUpperBound(), .000000001d);
+	}
+	
+	/**
+	 * Shift 3 inputs not allow crossing pos to neg test.
+	 */
+	@Test
+	public void shift_3Inputs_notAllowCrossing_posToNeg_Test() {
+		Range base = new Range(-5, 5);
+		double delta = -10;
+		Range result = Range.shift(base, delta, false);
+		assertEquals("(-5,5) shifted by -10 and NO zero crossing should return (-15,0). Lower bound should be -15.",
+				-15, result.getLowerBound(), .000000001d);
+		assertEquals("(-5,5) shifted by -10 and NO zero crossing should return (-15,0). Upper bound should be 0.", 0,
+				result.getUpperBound(), .000000001d);
+	}
+	
+	//////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////
+	
+	/**
+	 * Shift with no zero crossing zero test.
+	 */
+	@Test
+	public void shiftWithNoZeroCrossing_zero_Test() {
+		Range base = new Range(-5, 5);
+		double delta = 0.0;
+		Range result = Range.shift(base, delta, false);
+		assertEquals("(-5,5) shifted by 0 and NO zero crossing should return (-5,5). Lower bound should be -5.", -5,
+				result.getLowerBound(), .000000001d);
+		assertEquals("(-5,5) shifted by 0 and NO zero crossing should return (-5,5). Upper bound should be 5.", 5,
+				result.getUpperBound(), .000000001d);
+	}
+	
+	/**
+	 * Shift with no zero crossing range has zero test.
+	 */
+	@Test
+	public void shiftWithNoZeroCrossing_rangeHasZero_Test() {
+		Range base = new Range(0, 5);
+		double delta = 5;
+		Range result = Range.shift(base, delta, false);
+		assertEquals("(-5,5) shifted by 5 and NO zero crossing should return (5,10). Lower bound should be 5.", 5,
+				result.getLowerBound(), .000000001d);
+		assertEquals("(-5,5) shifted by 5 and NO zero crossing should return (5,10). Upper bound should be 10.", 10,
+				result.getUpperBound(), .000000001d);
+	}
+	//////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////
+	
+	/**
+	 * Equals non range test.
+	 */
+	@Test
+	public void equals_nonRange_Test() {
+		// 334 true
+		Range range1 = new Range(-5, 5);
+		Object range2 = new Object();
+		boolean result = range1.equals(range2);
+		assertFalse("comparing a non-range Object to range should return false", result);
+	}
+	
+	/**
+	 * Equals lower unequal test.
+	 */
+	@Test
+	public void equals_lowerUnequal_Test() {
+		// 334 false
+		// 338 true
+		Range range1 = new Range(-5, 5);
+		Range range2 = new Range(0, 5);
+		boolean result = range1.equals(range2);
+		assertFalse("compare (-5,5) to (0,5), lower bound of range 2 not equal. should return false", result);
+	}
+	
+	/**
+	 * Equals upper unequal test.
+	 */
+	@Test
+	public void equals_upperUnequal_Test() {
+		// 334 false
+		// 338 true
+		Range range1 = new Range(-5, 5);
+		Range range2 = new Range(-5, 0);
+		boolean result = range1.equals(range2);
+		assertFalse("compare (-5,5) to (-5,0), upper bound of range 2 not equal. should return false", result);
+	}
+	
+	/**
+	 * Equals equivalent test.
+	 */
+	@Test
+	public void equals_equivalent_Test() {
+		// 334 false
+		// 338 true
+		Range range1 = new Range(-5, 5);
+		Range range2 = new Range(-5, 5);
+		boolean result = range1.equals(range2);
+		assertTrue("compare (-5,5) to (-5,5), bounds same. should return true", result);
+	}
+	
+	//////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////
+	
 	/**
 	 * Hash code test.
 	 */
 	@Test
-	public void hashCodeTest() {
-		
+	public void hashCode_Test() {
+		Range range = new Range(-5, 5);
+		int hashCode = range.hashCode();
+		assertNotNull("hashcode should be something... it is null.", hashCode);
 	}
 	
 	//////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////
+	
 	/**
 	 * To string test.
 	 */
 	@Test
-	public void toStringTest() {
+	public void toString_Test() {
+		// "Range[lower,upper]"
 		// return ("Range[" + this.lower + "," + this.upper + "]");
+		// String.equals(); ???
+		Range range = new Range(-5, 5);
+		String myString = "Range[-5,5]";
+		String rangeString = range.toString();
+		// assertEquals("(-5,5) shifted by 5 and NO zero crossing should return (5,10).
+		// Lower bound should be 5.",
+		// myString, rangeString, .000000001d);
+		// TODO: CANNOT HAVE MESSAGE WITH STRING COMPARAISON!!!
+		assertEquals(myString, rangeString);
+		
 	}
 	//////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////
