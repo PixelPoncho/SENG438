@@ -106,7 +106,7 @@ public class RangeTest_2_OtherFuncs {
 		// 153 true
 		Range myRange = new Range(0, 5);
 		boolean intersects = myRange.intersects(-1, 2);
-		assertTrue("(0,0) and (-1,5) should intersect", intersects);
+		assertTrue("(0,5) and (-1,2) should intersect - overlap across bottom", intersects);
 		
 	}
 	
@@ -563,6 +563,7 @@ public class RangeTest_2_OtherFuncs {
 	/**
 	 * Hash code test.
 	 */
+	
 	@Test
 	public void hashCode_Test() {
 		Range range = new Range(-5, 5);

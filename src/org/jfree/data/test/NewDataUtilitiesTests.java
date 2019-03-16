@@ -41,7 +41,7 @@ public class NewDataUtilitiesTests {
 	 * Test calculateColumnTotal when there are 0 rows
 	 * */
 	@Test
-	public void calculateColumnTotalOneNullValue() {
+	public void calculateColumnTotalZeroRows() {
 		Mockery mockingContext = new Mockery();
 		Values2D mockedDependancy = mockingContext.mock(Values2D.class);
 		mockingContext.checking(new Expectations() {

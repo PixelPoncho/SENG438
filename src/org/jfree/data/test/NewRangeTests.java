@@ -12,6 +12,7 @@ public class NewRangeTests {
 	/*
 	 * Creates Range with lower bound larger than upper
 	 * */
+	
 	@Test(expected=IllegalArgumentException.class)
 	public void rangeWithLowerGreaterThanUpper() {
 		double lower = 10;
@@ -19,8 +20,9 @@ public class NewRangeTests {
 		new Range(lower, upper);	
 	}
 	
+	
 	/*
-	 * Test Constrain when value isnt in range - above range
+	 * Test Constrain when value is not in range - above range
 	 * */
 	@Test
 	public void constrainValueAboveRange() {
