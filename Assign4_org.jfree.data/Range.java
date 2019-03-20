@@ -201,7 +201,7 @@ public strictfp class Range implements Serializable {
         }
         else {
             if (range2 == null) {
-                return range2;
+                return range1;
             }
             else {
                 double l = Math.min(range1.getLowerBound(), 
@@ -241,6 +241,8 @@ public strictfp class Range implements Serializable {
      * Creates a new range by adding margins to an existing range.
      * For example: expand(new Range(2, 6), 0.25, 0.5) returns a range from 1 to 8.
      * 
+     * @throws InvalidParameterException if null range object is passed in.
+     * 
      * @param range  the range (<code>null</code> not permitted).
      * @param lowerMargin  the lower margin (expressed as a percentage of the 
      *                     range length).
@@ -266,7 +268,9 @@ public strictfp class Range implements Serializable {
      * (to the right) by the delta value. Is equivalent to shift(base, delta, false)
      * (does not allow zero crossing).
      * 
-     * @param base  the base range.
+     * @throws InvalidParameterException if null base object is passed in.
+     * 
+     * @param base  the base range (<code>null</code> not permitted).
      * @param delta  the amount to shift right by.
      * 
      * @return A range representing the base range shifted right by delta.
@@ -281,7 +285,9 @@ public strictfp class Range implements Serializable {
      * (either from negative to positive, or positive to negative), will become 
      * zero.
      * 
-     * @param base  the base range.
+     * @throws InvalidParameterException if null base object is passed in.
+     * 
+     * @param base  the base range (<code>null</code> not permitted).
      * @param delta  the shift amount.
      * @param allowZeroCrossing  a flag that determines whether or not the 
      *                           bounds of the range are allowed to cross
@@ -339,7 +345,7 @@ public strictfp class Range implements Serializable {
             return false;
         }
         if (!(this.upper == range.upper)) {
-            return true;
+            return false;
         }
         return true;
     }

@@ -57,6 +57,8 @@ public abstract class DataUtilities {
      * Returns the sum of the values in one column of the supplied data
      * table. With invalid input, a total of zero will be returned.
      * 
+     * @throws InvalidParameterException if invalid data object is passed in.
+     * 
      * @param data  the table of values (<code>null</code> not permitted).
      * @param column  the column index (zero-based).
      * 
@@ -78,6 +80,8 @@ public abstract class DataUtilities {
      * Returns the sum of the values in one row of the supplied data
      * table. With invalid input, a total of zero will be returned.
      * 
+     * @throws InvalidParameterException if invalid data object is passed in.
+     * 
      * @param data  the table of values (<code>null</code> not permitted).
      * @param row  the row index (zero-based).
      * 
@@ -98,6 +102,8 @@ public abstract class DataUtilities {
     /**
      * Constructs an array of <code>Number</code> objects from an array of 
      * <code>double</code> primitives.
+     * 
+     * @throws InvalidParameterException if invalid data object is passed in.
      *
      * @param data  An array of <code>double</code> primitives (<code>null</code> not permitted).
      *
@@ -117,6 +123,8 @@ public abstract class DataUtilities {
     /**
      * Constructs an array of arrays of <code>Number</code> objects from a 
      * corresponding structure containing <code>double</code> primitives.
+     * 
+     * @throws InvalidParameterException if invalid data object is passed in.
      *
      * @param data  An array of <code>double</code> primitives (<code>null</code> not permitted).
      *
@@ -155,6 +163,8 @@ public abstract class DataUtilities {
      *  2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.0 ((5 + 9 + 2) / 16)<br>
      * <p>
      * The percentages are values between 0.0 and 1.0 (where 1.0 = 100%).
+     * 
+     * @throws InvalidParameterException if invalid data object is passed in.
      *
      * @param data  the data (<code>null</code> not permitted).
      *
@@ -176,7 +186,7 @@ public abstract class DataUtilities {
         for (int i = 0; i < data.getItemCount(); i++) {
             Number v = data.getValue(i);
             if (v != null) {
-                runningTotal = runningTotal + v.doubleValue() * 0.9d;
+                runningTotal = runningTotal + v.doubleValue();
             }
             result.addValue(data.getKey(i), new Double(runningTotal / total));
         }
