@@ -1,7 +1,5 @@
 package org.jfree.data.test;
 
-
-
 import static org.junit.Assert.*;
 
 import java.awt.List;
@@ -80,22 +78,18 @@ public class DataUtilitesTests extends DataUtilities {
 	Values2D		mockedDependancy;
 	
 	/*
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
-	*/
+	 * @BeforeClass public static void setUpBeforeClass() throws Exception { }
+	 */
 	
 	/**
 	 * Tear down after class.
 	 *
-	 * @throws Exception the exception
+	 * @return the cumulative percentage test empty list
 	 */
 	/*
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
-	
-	*/
+	 * @AfterClass public static void tearDownAfterClass() throws Exception { }
+	 * 
+	 */
 	
 	/**
 	 * Sets the up. METHODS TO SIMULATE:
@@ -112,15 +106,12 @@ public class DataUtilitesTests extends DataUtilities {
 	 * @throws Exception the exception
 	 */
 	/*
-	@Before
-	public void setUp() throws Exception {
-		// mockingContext = new Mockery();
-		// mockedDependancy = mockingContext.mock(DefaultKeyedValues.class);
-		// don't know if need below, but eh...
-		// mockingContext2 = new Mockery();
-		// mockedDependancy2 = mockingContext2.mock(DefaultKeyedValues.class);
-	}
-	*/
+	 * @Before public void setUp() throws Exception { // mockingContext = new
+	 * Mockery(); // mockedDependancy =
+	 * mockingContext.mock(DefaultKeyedValues.class); // don't know if need below,
+	 * but eh... // mockingContext2 = new Mockery(); // mockedDependancy2 =
+	 * mockingContext2.mock(DefaultKeyedValues.class); }
+	 */
 	
 	/**
 	 * Tear down.
@@ -128,10 +119,8 @@ public class DataUtilitesTests extends DataUtilities {
 	 * @throws Exception the exception
 	 */
 	/*
-	@After
-	public void tearDown() throws Exception {
-	}
-	*/
+	 * @After public void tearDown() throws Exception { }
+	 */
 	
 	/**
 	 * Gets the cumulative percentage test empty list.
@@ -240,9 +229,14 @@ public class DataUtilitesTests extends DataUtilities {
 			assertEquals(output.getKey(0), mine.getKey(0));
 			assertEquals(output.getKey(1), mine.getKey(1));
 			assertEquals(output.getKey(2), mine.getKey(2));
-			assertEquals(output.getValue(0), mine.getValue(0));
-			assertEquals(output.getValue(1), mine.getValue(1));
-			assertEquals(output.getValue(2), mine.getValue(2));
+			// 0.0 != -0.0; ????????
+			assertEquals("expected: " + output.getValue(0) + " actual: " + mine.getValue(0),
+					(double) output.getValue(0), (double) mine.getValue(0), .000000001d);
+			assertEquals("expected: " + output.getValue(1) + " actual: " + mine.getValue(1),
+					(double) output.getValue(1), (double) mine.getValue(1), .000000001d);
+			assertEquals("expected: " + output.getValue(2) + " actual: " + mine.getValue(2),
+					(double) output.getValue(2), (double) mine.getValue(2), .000000001d);
+			// assertEquals(output.getValue(2), mine.getValue(2));
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -530,11 +524,11 @@ public class DataUtilitesTests extends DataUtilities {
 	}
 	
 	/**
-	 * Calculate column total one null value. 
+	 * Calculate column total one null value.
 	 * 
-	 * This case is not covered by the
-	 * requirements... are we supposed to do it still? I have no idea what is
-	 * supposed to happen, but it appears to treat the null as a 1
+	 * This case is not covered by the requirements... are we supposed to do it
+	 * still? I have no idea what is supposed to happen, but it appears to treat the
+	 * null as a 1
 	 */
 	@Test
 	public void calculateColumnTotalOneNullValue() {
@@ -550,7 +544,7 @@ public class DataUtilitesTests extends DataUtilities {
 		});
 		
 		double result = DataUtilities.calculateColumnTotal(mockedDependancy, 0);
-
+		
 		// What am I supposed to assert? There is no defined behaviour for this case
 		// ERROR: This works when expecting 6 for some reason?
 		assertEquals(5, result, .000000001d);
@@ -669,18 +663,17 @@ public class DataUtilitesTests extends DataUtilities {
 		
 		double result = DataUtilities.calculateRowTotal(mockedDependancy, 0);
 		
-		//What am I supposed to assert? There is no defined behaviour for this case
-		//ERROR: This works when expecting 6 for some reason?
+		// What am I supposed to assert? There is no defined behaviour for this case
+		// ERROR: This works when expecting 6 for some reason?
 		assertEquals(5, result, 000000001d);
 	}
-
+	
 	/**
 	 * Calculate row total with pos and neg data values high postive row value.
 	 */
 	@Test
 	public void calculateRowTotalWithPosAndNegDataValuesHighPostiveRowValue() {
-		mockingContext.checking(
-				new Expectations() {
+		mockingContext.checking(new Expectations() {
 			{
 				one(mockedDependancy).getColumnCount();
 				will(returnValue(2));
@@ -974,10 +967,12 @@ public class DataUtilitesTests extends DataUtilities {
 		
 	}
 	
-	
+	/**
+	 * Test lower bound same as upper.
+	 */
 	@Test
 	public void testLowerBoundSameAsUpper() {
-		Range exampleRange = new Range(0,0);
+		Range exampleRange = new Range(0, 0);
 		
 		Class<Range> rangeClass = Range.class;
 		
@@ -1010,73 +1005,74 @@ public class DataUtilitesTests extends DataUtilities {
 		
 	}
 	
-	
-	/*Error Thrown By Constructor - change value w. reflection set then check?*/
+	/* Error Thrown By Constructor - change value w. reflection set then check? */
 	/*
-	@Test
-	public void testLowerBoundGreaterThanUpper() {
-		Range exampleRange = new Range(1,0);
-		
-		Class<Range> rangeClass = Range.class;
-		
-		double testedLowerBound = exampleRange.getLowerBound();
-		
-		Field fieldLowerBound = null;
-		try {
-			fieldLowerBound = rangeClass.getDeclaredField("lower");
-			fieldLowerBound.setAccessible(true);
-//			fieldLowerBound = rangeClass.getField("org.jfree.data.Range.lower");
-		} catch (NoSuchFieldException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		// fieldLowerBound.set()
-		
-		double actualLowerBound = 0;
-		try {
-			actualLowerBound = fieldLowerBound.getDouble(exampleRange);
-		} catch (IllegalArgumentException | IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		// double actualLowerBound =
-		assertEquals("Value retrieved through getter and reflection should be the same", actualLowerBound,
-				testedLowerBound, .000000001d);
-				
-		
-	}
-	*/
+	 * @Test public void testLowerBoundGreaterThanUpper() { Range exampleRange = new
+	 * Range(1,0);
+	 * 
+	 * Class<Range> rangeClass = Range.class;
+	 * 
+	 * double testedLowerBound = exampleRange.getLowerBound();
+	 * 
+	 * Field fieldLowerBound = null; try { fieldLowerBound =
+	 * rangeClass.getDeclaredField("lower"); fieldLowerBound.setAccessible(true); //
+	 * fieldLowerBound = rangeClass.getField("org.jfree.data.Range.lower"); } catch
+	 * (NoSuchFieldException e) { // TODO Auto-generated catch block
+	 * e.printStackTrace(); } catch (SecurityException e) { // TODO Auto-generated
+	 * catch block e.printStackTrace(); } // fieldLowerBound.set()
+	 * 
+	 * double actualLowerBound = 0; try { actualLowerBound =
+	 * fieldLowerBound.getDouble(exampleRange); } catch (IllegalArgumentException |
+	 * IllegalAccessException e) { // TODO Auto-generated catch block
+	 * e.printStackTrace(); } // double actualLowerBound =
+	 * assertEquals("Value retrieved through getter and reflection should be the same"
+	 * , actualLowerBound, testedLowerBound, .000000001d);
+	 * 
+	 * 
+	 * }
+	 */
 	
+	/**
+	 * Creates the number array with null.
+	 */
 	/*
 	 * Sends null in as argument when creating Number Array
-	 * */
-	@Test(expected=InvalidParameterException.class)
+	 */
+	@Test(expected = InvalidParameterException.class)
 	public void createNumberArrayWithNull() {
 		DataUtilities.createNumberArray(null);
 	}
 	
+	/**
+	 * Creates the 2 D number array with null.
+	 */
 	/*
 	 * Sends null in as argument when creating 2D Number Array
-	 * */
-	@Test(expected=InvalidParameterException.class)
+	 */
+	@Test(expected = InvalidParameterException.class)
 	public void create2DNumberArrayWithNull() {
 		DataUtilities.createNumberArray2D(null);
 	}
 	
+	/**
+	 * Gets the cumulative percentages with null.
+	 *
+	 * @return the cumulative percentages with null
+	 */
 	/*
 	 * Sends null in as argument when getting cumulative percentages
-	 * */
-	@Test(expected=InvalidParameterException.class)
+	 */
+	@Test(expected = InvalidParameterException.class)
 	public void getCumulativePercentagesWithNull() {
 		DataUtilities.getCumulativePercentages(null);
 	}
 	
+	/**
+	 * Calculate column total zero rows.
+	 */
 	/*
 	 * Test calculateColumnTotal when there are 0 rows
-	 * */
+	 */
 	@Test
 	public void calculateColumnTotalZeroRows() {
 		Mockery mockingContext = new Mockery();
@@ -1085,12 +1081,12 @@ public class DataUtilitesTests extends DataUtilities {
 			{
 				one(mockedDependancy).getRowCount();
 				will(returnValue(0));
-
+				
 			}
 		});
 		
 		double result = DataUtilities.calculateColumnTotal(mockedDependancy, 0);
-
+		
 		assertEquals("testing CalculateColumnTotal with 0 rows", 0, result, .000000001d);
 	}
 }

@@ -745,7 +745,7 @@ public class RangeTest {
 // return ("Range[" + this.lower + "," + this.upper + "]");
 // String.equals(); ???
 		Range range = new Range(-5, 5);
-		String myString = "Range[-5,5]";
+		String myString = "Range[-5.0,5.0]";
 		String rangeString = range.toString();
 // assertEquals("(-5,5) shifted by 5 and NO zero crossing should return (5,10).
 // Lower bound should be 5.",
