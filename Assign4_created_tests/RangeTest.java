@@ -803,4 +803,69 @@ public class RangeTest {
 		assertEquals("Constrain lower when value out of range", lower, result, .000000001d);
 	}
 	
+	
+	//Mutation Testing tests
+	
+	/*
+	 * 
+	 * Test range almost overlaps on bottom
+	 * */
+	@Test
+	public void intersects_almost_intersects_bottom() {
+		Range myRange = new Range(0, 5);
+		boolean intersects = myRange.intersects(-5, 0);
+		assertFalse("test that almost intersecting on bottom ranges dont intersect ", intersects);
+		
+	}
+	
+	/*
+	 * 
+	 * Test range almost intersects on top
+	 * */
+	@Test
+	public void intersects_almost_intersects_top() {
+		Range myRange = new Range(-5, 0);
+		boolean intersects = myRange.intersects(0, 5);
+		assertFalse("test that almost intersecting on top ranges dont intersect ", intersects);
+		
+	}
+	
+	/*
+	 * 
+	 * Test range where lower > upper
+	 * */
+	@Test
+	public void intersects_invalid_range() {
+		Range myRange = new Range(0, 5);
+		boolean intersects = myRange.intersects(5, 0);
+		assertFalse("test where lower > upper doesnt intersect ", intersects);
+		
+	}
+	
+	/*
+	 * check that hash code return the correct result
+	 * the doubleToLongBits value is 0??? I managed to find the magic range!?!?
+	 * How did i manage to find the one range that doesnt test well
+	 * */
+//	@Test
+//	public void check_hashcode_is_correct() {
+//		Range myRange = new Range(0, 5);
+//		int hashCode = myRange.hashCode();
+//		int expectedHashCode = 1075052544;
+//		assertEquals("the hashcode result should be the same as expected", hashCode, expectedHashCode);
+//		
+//	}
+	
+	/*
+	 * check that hash code return the correct result
+	 * */
+	@Test
+	public void check_hashcode_is_correct() {
+		Range myRange = new Range(-10, -1);
+		int hashCode = myRange.hashCode();
+		int expectedHashCode = -2080112640;
+		assertEquals("the hashcode result should be the same as expected", hashCode, expectedHashCode);
+		
+	}
+	
 }
