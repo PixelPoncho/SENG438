@@ -153,7 +153,8 @@ public strictfp class Range implements Serializable {
             return (upper > this.lower);
         }
         else {
-            return (lower < this.upper && upper >= lower);
+           // return (upper < this.upper && upper >= lower);
+        	return (lower < this.upper && upper >= lower);
         }
     }
 
@@ -360,9 +361,11 @@ public strictfp class Range implements Serializable {
         int result;
         long temp;
         temp = Double.doubleToLongBits(this.lower);
+      //  System.out.println(temp);
         result = (int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(this.upper);
         result = 29 * result + (int) (temp ^ (temp >>> 32));
+      //  System.out.println("result " + result);
         return result;
     }
 
