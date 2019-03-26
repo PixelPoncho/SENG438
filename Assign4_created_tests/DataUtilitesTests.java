@@ -235,7 +235,9 @@ public class DataUtilitesTests extends DataUtilities {
 			assertEquals("expected: " + output.getValue(1) + " actual: " + mine.getValue(1),
 					(double) output.getValue(1), (double) mine.getValue(1), .000000001d);
 			assertEquals("expected: " + output.getValue(2) + " actual: " + mine.getValue(2),
-					(double) output.getValue(2), (double) mine.getValue(2), .000000001d);
+					//(double) output.getValue(2), (double) mine.getValue(2), .000000001d);
+					//wtf is happening below, whatever it does works
+					(double) ((Integer)output.getValue(2)).intValue(), (double) mine.getValue(2), .000000001d);
 			// assertEquals(output.getValue(2), mine.getValue(2));
 			
 		} catch (Exception e) {
@@ -357,7 +359,7 @@ public class DataUtilitesTests extends DataUtilities {
 //		 * will(myList.select(0)); // then(returnValue(myList.getSelectedIndex()));//
 //		 * Will throw // java.lang.IndexOutOfBoundsException
 //		 * allowing(mockedDependancy2).getKey(0); will(returnValue("0"));
-//		 * allowing(mockedDependancy2).getValue(0); will(returnValue(0));
+	//		 * allowing(mockedDependancy2).getValue(0); will(returnValue(0));
 //		 * allowing(mockedDependancy2).getKey(1); will(returnValue("1"));
 //		 * allowing(mockedDependancy2).getValue(1); will(returnValue(1));
 //		 * allowing(mockedDependancy2).getKeys(); will(returnValue(myList)); } });

@@ -842,19 +842,7 @@ public class RangeTest {
 		
 	}
 	
-	/*
-	 * check that hash code return the correct result
-	 * the doubleToLongBits value is 0??? I managed to find the magic range!?!?
-	 * How did i manage to find the one range that doesnt test well
-	 * */
-//	@Test
-//	public void check_hashcode_is_correct() {
-//		Range myRange = new Range(0, 5);
-//		int hashCode = myRange.hashCode();
-//		int expectedHashCode = 1075052544;
-//		assertEquals("the hashcode result should be the same as expected", hashCode, expectedHashCode);
-//		
-//	}
+
 	
 	/*
 	 * check that hash code return the correct result
