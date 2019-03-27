@@ -1,4 +1,8 @@
-package org.jfree.data.test;
+//package org.jfree.data.test;
+
+/**
+ *
+ */
 
 import static org.junit.Assert.*;
 
@@ -7,28 +11,38 @@ import org.junit.*;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class RangeTest_2_OtherFuncs.
+ * <pre>
+ * 
+ * The Class RangeTest.
+ * 
+ * To be able to test any given range, one MUST CHANGE the 2 class variables:
+ * upper and lower. Equivalence classes on input are -Double.MAX_VALUE, negative value, 0, positive value, DOUBLE.MAX_VALUE, and null.
+ * Since we are dealing with a range, we have additional equivalence classes of lengths 0, infinite, DOUBLE.MAX_VALUE, positive, and negative. By weak ECT, classes are:
+ * (0,0)
+ * (-1,1) 
+ * (1,-1)
+ * (-Double,MAX_VALUE, 0) 
+ * (- Double.MAX_VALUE, Double.MAX_VALUE)
+ * (NULL, NULL)
  *
- * @author arebe
+ * &#64;author arebe
+ * </pre>
  */
-public class RangeTest_2_OtherFuncs {
+
+public class RangeTest {
 	/*
 	 * extends Range { } public RangeTest(double lower, double upper) { super(lower,
 	 * upper); // TODO Auto-generated constructor stub }
 	 */
 	
-	/**
-	 * The example range.
-	 *
-	 * @throws Exception the exception
-	 */
-	// private Range exampleRange;
+	/** The example range. */
+	private Range	exampleRange;
 	
 	/** The upper. */
-	// private double upper = Double.MAX_VALUE;
+	private double	upper	= 5;
 	
 	/** The lower. */
-	// private double lower = -Double.MAX_VALUE;
+	private double	lower	= -5;
 	
 	/**
 	 * Sets the up before class.
@@ -47,7 +61,153 @@ public class RangeTest_2_OtherFuncs {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		// exampleRange = new Range(lower, upper);
+		exampleRange = new Range(lower, upper);
+	}
+	
+	/**
+	 * Central value.
+	 */
+	@Test
+	public void centralValueTest() {
+		double centralValue = (upper + lower) / 2;
+		assertEquals("Getting central value", centralValue, exampleRange.getCentralValue(), .000000001d);
+	}
+	
+	/**
+	 * Gets the lower bound.
+	 *
+	 * @return the lower bound
+	 */
+	@Test
+	public void getLowerBoundTest() {
+		// exampleRange = new Range(0,10);
+		assertEquals("Getting lower bound", lower, exampleRange.getLowerBound(), .000000001d);
+	}
+	
+	/**
+	 * Gets the upper bound.
+	 *
+	 * @return the upper bound
+	 */
+	@Test
+	public void getUpperBoundTest() {
+		// exampleRange = new Range(0,10);
+		assertEquals("Getting upper bound", upper, exampleRange.getUpperBound(), .000000001d);
+	}
+	
+	/**
+	 * Gets the length.
+	 *
+	 * @return the length
+	 */
+	@Test
+	public void getLengthTest() {
+		// exampleRange = new Range(0,10);
+		// double absUpper = Math.abs(upper);
+		// double absLower = Math.abs(lower);
+		double myCalcLength = upper - lower;
+		assertEquals("Getting length", myCalcLength, exampleRange.getLength(), .000000001d);
+	}
+	
+	/**
+	 * Contains BLB.
+	 */
+	
+	@Test
+	public void containsBLB() {
+		// exampleRange = new Range(0,10);
+		double BLB = lower - 1;
+		assertFalse("Contains() on " + lower + " - 1", exampleRange.contains(BLB));
+	}
+	
+	/**
+	 * Contains LB.
+	 */
+	@Test
+	public void containsLB() {
+		// exampleRange = new Range(0,10);
+		double LB = lower;
+		assertTrue("Contains() on" + lower, exampleRange.contains(LB));
+	}
+	
+	/**
+	 * Contains AUB.
+	 */
+	@Test
+	public void containsAUB() {
+		// exampleRange = new Range(0,10);
+		double AUB = upper + 1;
+		assertFalse("Contains on" + upper + "+ 1", exampleRange.contains(AUB));
+	}
+	
+	/**
+	 * Contains UB.
+	 */
+	@Test
+	public void containsUB() {
+		// exampleRange = new Range(0,10);
+		double UB = upper;
+		assertTrue("Contains on " + upper, exampleRange.contains(UB));
+	}
+	
+	/**
+	 * Contains my central.
+	 */
+	@Test
+	public void containsCentral() {
+		// exampleRange = new Range(0,10);
+		double centralValue = (upper + lower) / 2;
+		assertTrue("Contains() on central value", exampleRange.contains(centralValue));
+	}
+	
+	/**
+	 * Constrains my central.
+	 */
+	@Test
+	public void constrainsCentral() {
+		// exampleRange = new Range(0,10);
+		double centralValue = (upper + lower) / 2; // not using inbuilt cntralvalue because reasons
+		assertEquals("Constrains() on central value", centralValue, exampleRange.constrain(centralValue), .000000001d);
+	}
+	
+	/**
+	 * Constrains BLB.
+	 */
+	@Test
+	public void constrainsBLB() {
+		// exampleRange = new Range(0,10);
+		double BLB = lower - 1;
+		assertEquals("Constrains() on lower - 1", lower, exampleRange.constrain(BLB), .000000001d);
+	}
+	
+	/**
+	 * Constrains LB.
+	 */
+	@Test
+	public void constrainsLB() {
+		// exampleRange = new Range(0,10);
+		double LB = lower;
+		assertEquals("Constrains on lower", lower, exampleRange.constrain(LB), .000000001d);
+	}
+	
+	/**
+	 * Constrains AUB.
+	 */
+	@Test
+	public void constrainsAUB() {
+		// exampleRange = new Range(0,10);
+		double AUB = upper + 1;
+		assertEquals("Constrains() on upper + 1", upper, exampleRange.constrain(AUB), .000000001d);
+	}
+	
+	/**
+	 * Constrains UB.
+	 */
+	@Test
+	public void constrainsUB() {
+		// exampleRange = new Range(0,10);
+		double UB = upper;
+		assertEquals("Constrains on upper", upper, exampleRange.constrain(UB), .000000001d);
 	}
 	
 	/**
@@ -68,19 +228,19 @@ public class RangeTest_2_OtherFuncs {
 	public static void tearDownAfterClass() throws Exception {
 	}
 	
-	//////////////////////////////////////////////////////////////////////
-	//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
 	
 	/**
 	 * Intersects same test.
 	 */
 	@Test
 	public void intersects_same_Test() {
-		// 152 true
-		// 153 true
+// 152 true
+// 153 true
 		Range myRange = new Range(0, 10);
 		boolean intersects = myRange.intersects(0, 10);
-		assertFalse("(0,10) and (0,10) should NOT intersect", intersects);
+		assertTrue("(0,10) and (0,10) should intersect", intersects);
 		
 	}
 	
@@ -89,8 +249,8 @@ public class RangeTest_2_OtherFuncs {
 	 */
 	@Test
 	public void intersects_zero_Test() {
-		// 152 true
-		// 153 false
+// 152 true
+// 153 false
 		Range myRange = new Range(0, 0);
 		boolean intersects = myRange.intersects(0, 0);
 		assertFalse("(0,0) and (0,0) should NOT intersect", intersects);
@@ -102,8 +262,8 @@ public class RangeTest_2_OtherFuncs {
 	 */
 	@Test
 	public void intersects_smallerLower_Test() {
-		// 152 true
-		// 153 true
+// 152 true
+// 153 true
 		Range myRange = new Range(0, 5);
 		boolean intersects = myRange.intersects(-1, 2);
 		assertTrue("(0,5) and (-1,2) should intersect - overlap across bottom", intersects);
@@ -115,12 +275,12 @@ public class RangeTest_2_OtherFuncs {
 	 */
 	@Test
 	public void intersects_specifiedIsContained_Test() {
-		// 152 false
-		// 156 A true
-		// 156 B true
+// 152 false
+// 156 A true
+// 156 B true
 		Range myRange = new Range(-5, 5);
 		boolean intersects = myRange.intersects(0, 2);
-		assertFalse("(-5,5) and (0,2) should NOT intersect", intersects);
+		assertTrue("(-5,5) and (0,2) should intersect", intersects);
 		
 	}
 	
@@ -129,11 +289,11 @@ public class RangeTest_2_OtherFuncs {
 	 */
 	@Test
 	public void intersects_rangeIsContained_Test() {
-		// 152 true
-		// 153 true
+// 152 true
+// 153 true
 		Range myRange = new Range(-5, 5);
 		boolean intersects = myRange.intersects(-10, 10);
-		assertFalse("(-5,5) and (-10,10) should NOT intersect", intersects);
+		assertTrue("(-5,5) and (-10,10) should intersect", intersects);
 		
 	}
 	
@@ -142,9 +302,9 @@ public class RangeTest_2_OtherFuncs {
 	 */
 	@Test
 	public void intersects_invalidReverseRange_Test() {
-		// 152 false
-		// 156 A true
-		// 156 B false
+// 152 false
+// 156 A true
+// 156 B false
 		Range myRange = new Range(-5, 5);
 		boolean intersects = myRange.intersects(10, 0);
 		assertFalse("(-5,5) and (10,0) should NOT intersect(invalid 2nd range)", intersects);
@@ -156,9 +316,9 @@ public class RangeTest_2_OtherFuncs {
 	 */
 	@Test
 	public void intersects_invalidReverseRange_FF_Test() {
-		// 152 false
-		// 156 A false
-		// 156 B false
+// 152 false
+// 156 A false
+// 156 B false
 		Range myRange = new Range(-5, 5);
 		boolean intersects = myRange.intersects(0, -2);
 		assertFalse("(-5,5) and (0,-2) should NOT intersect(invalid 2nd range)", intersects);
@@ -166,6 +326,8 @@ public class RangeTest_2_OtherFuncs {
 	}
 	
 	/**
+	 * TODO: THIS TEST FAILS REINSTATE IT
+	 * 
 	 * Intersects larger both test.
 	 */
 	@Test
@@ -179,18 +341,18 @@ public class RangeTest_2_OtherFuncs {
 		
 	}
 	
-	//////////////////////////////////////////////////////////////////////
-	//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
 	
 	/**
 	 * Constrain containts test.
 	 */
 	@Test
 	public void constrain_containts_Test() {
-		// 171 false
+// 171 false
 		Range myRange = new Range(-5, 5);
 		double constrains = myRange.constrain(0);
-		// assertEquals(message, expected, actual);
+// assertEquals(message, expected, actual);
 		assertEquals("(-5,5) should constrain 0 to 0", 0, constrains, .000000001d);
 	}
 	
@@ -199,11 +361,11 @@ public class RangeTest_2_OtherFuncs {
 	 */
 	@Test
 	public void constrain_largerThanUpper_Test() {
-		// 171 true
-		// 172 true
+// 171 true
+// 172 true
 		Range myRange = new Range(-5, 5);
 		double constrains = myRange.constrain(10);
-		// assertEquals(message, expected, actual);
+// assertEquals(message, expected, actual);
 		assertEquals("(-5,5) should constrain 10 to 5", 5, constrains, .000000001d);
 	}
 	
@@ -212,12 +374,12 @@ public class RangeTest_2_OtherFuncs {
 	 */
 	@Test
 	public void constrain_smallerThanLower_Test() {
-		// 171 true
-		// 172 false
-		// 175 true
+// 171 true
+// 172 false
+// 175 true
 		Range myRange = new Range(-5, 5);
 		double constrains = myRange.constrain(-10);
-		// assertEquals(message, expected, actual);
+// assertEquals(message, expected, actual);
 		assertEquals("(-5,5) should constrain -10 to -5", -5, constrains, .000000001d);
 	}
 	
@@ -226,16 +388,16 @@ public class RangeTest_2_OtherFuncs {
 	 */
 	@Test
 	public void constrain_lowerBound_Test() {
-		// 171 true??
-		// 172 false
-		// 175 hopefully False
+// 171 true??
+// 172 false
+// 175 hopefully False
 		Range myRange = new Range(-5, 5);
 		double constrains = myRange.constrain(-5);
-		// assertEquals(message, expected, actual);
+// assertEquals(message, expected, actual);
 		assertEquals("(-5,5) should constrain -5 to -5", -5, constrains, .000000001d);
 	}
-	//////////////////////////////////////////////////////////////////////
-	//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
 	
 	/*
 	 * TODO: note that CANNOT test combine without using getLowerBound or
@@ -247,7 +409,7 @@ public class RangeTest_2_OtherFuncs {
 	 */
 	@Test
 	public void combine_firstNull_Test() {
-		// 199 true
+// 199 true
 		Range range1 = null;
 		Range range2 = new Range(-5, 5);
 		Range result = Range.combine(range1, range2);
@@ -263,8 +425,8 @@ public class RangeTest_2_OtherFuncs {
 	 */
 	@Test
 	public void combine_secondNull_Test() {
-		// 199 false
-		// 203 true
+// 199 false
+// 203 true
 		Range range1 = new Range(-5, 5);
 		Range range2 = null;
 		Range result = Range.combine(range1, range2);
@@ -280,8 +442,8 @@ public class RangeTest_2_OtherFuncs {
 	 */
 	@Test
 	public void combine_bothNotNull_Test() {
-		// 199 false
-		// 203 false
+// 199 false
+// 203 false
 		Range range1 = new Range(-5, 5);
 		Range range2 = new Range(10, 20);
 		Range result = Range.combine(range1, range2);
@@ -292,15 +454,15 @@ public class RangeTest_2_OtherFuncs {
 		
 	}
 	
-	//////////////////////////////////////////////////////////////////////
-	//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
 	
 	/**
 	 * Expand to include range null test.
 	 */
 	@Test
 	public void expandToInclude_rangeNull_Test() {
-		// 226 true
+// 226 true
 		Range range = null;
 		double value = 10;
 		Range result = Range.expandToInclude(range, value);
@@ -315,8 +477,8 @@ public class RangeTest_2_OtherFuncs {
 	 */
 	@Test
 	public void expandToInclude_smallerLower_Test() {
-		// 226 false
-		// 229 true
+// 226 false
+// 229 true
 		Range range = new Range(-5, 5);
 		double value = -10;
 		Range result = Range.expandToInclude(range, value);
@@ -331,9 +493,9 @@ public class RangeTest_2_OtherFuncs {
 	 */
 	@Test
 	public void expandToInclude_biggerUpper_Test() {
-		// 226 false
-		// 229 false
-		// 232 true
+// 226 false
+// 229 false
+// 232 true
 		Range range = new Range(-5, 5);
 		double value = 10;
 		Range result = Range.expandToInclude(range, value);
@@ -348,9 +510,9 @@ public class RangeTest_2_OtherFuncs {
 	 */
 	@Test
 	public void expandToInclude_contained_Test() {
-		// 226 false
-		// 229 false
-		// 232 false
+// 226 false
+// 229 false
+// 232 false
 		Range range = new Range(-5, 5);
 		double value = 0;
 		Range result = Range.expandToInclude(range, value);
@@ -359,15 +521,15 @@ public class RangeTest_2_OtherFuncs {
 		assertEquals("(-5,5) expanding to include 0 should return (-5,5). Upper bound should be 5.", 5,
 				result.getUpperBound(), .000000001d);
 	}
-	//////////////////////////////////////////////////////////////////////
-	//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
 	
 	/**
 	 * Expand null range test.
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void expand_nullRange_Test() {
-		// 254 true
+// 254 true
 		Range range = null;
 		double lowerMargin = 0;
 		double upperMargin = 0;
@@ -385,8 +547,8 @@ public class RangeTest_2_OtherFuncs {
 	 */
 	@Test
 	public void expand_Good_Test() {
-		// 254 false
-		// For example: expand(new Range(2, 6), 0.25, 0.5) returns a range from 1 to 8.
+// 254 false
+// For example: expand(new Range(2, 6), 0.25, 0.5) returns a range from 1 to 8.
 		Range range = new Range(2, 6);
 		double lowerMargin = 0.25;
 		double upperMargin = 0.5;
@@ -397,8 +559,8 @@ public class RangeTest_2_OtherFuncs {
 				result.getUpperBound(), .000000001d);
 	}
 	
-	//////////////////////////////////////////////////////////////////////
-	//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
 	
 	/**
 	 * Shift 2 inputs not allow crossing test.
@@ -414,8 +576,8 @@ public class RangeTest_2_OtherFuncs {
 				.000000001d);
 	}
 	
-	//////////////////////////////////////////////////////////////////////
-	//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
 	
 	/**
 	 * Shift 3 inputs allow crossing test.
@@ -473,8 +635,8 @@ public class RangeTest_2_OtherFuncs {
 				result.getUpperBound(), .000000001d);
 	}
 	
-	//////////////////////////////////////////////////////////////////////
-	//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
 	
 	/**
 	 * Shift with no zero crossing zero test.
@@ -503,15 +665,15 @@ public class RangeTest_2_OtherFuncs {
 		assertEquals("(-5,5) shifted by 5 and NO zero crossing should return (5,10). Upper bound should be 10.", 10,
 				result.getUpperBound(), .000000001d);
 	}
-	//////////////////////////////////////////////////////////////////////
-	//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
 	
 	/**
 	 * Equals non range test.
 	 */
 	@Test
 	public void equals_nonRange_Test() {
-		// 334 true
+// 334 true
 		Range range1 = new Range(-5, 5);
 		Object range2 = new Object();
 		boolean result = range1.equals(range2);
@@ -523,8 +685,8 @@ public class RangeTest_2_OtherFuncs {
 	 */
 	@Test
 	public void equals_lowerUnequal_Test() {
-		// 334 false
-		// 338 true
+// 334 false
+// 338 true
 		Range range1 = new Range(-5, 5);
 		Range range2 = new Range(0, 5);
 		boolean result = range1.equals(range2);
@@ -536,8 +698,8 @@ public class RangeTest_2_OtherFuncs {
 	 */
 	@Test
 	public void equals_upperUnequal_Test() {
-		// 334 false
-		// 338 true
+// 334 false
+// 338 true
 		Range range1 = new Range(-5, 5);
 		Range range2 = new Range(-5, 0);
 		boolean result = range1.equals(range2);
@@ -549,16 +711,16 @@ public class RangeTest_2_OtherFuncs {
 	 */
 	@Test
 	public void equals_equivalent_Test() {
-		// 334 false
-		// 338 true
+// 334 false
+// 338 true
 		Range range1 = new Range(-5, 5);
 		Range range2 = new Range(-5, 5);
 		boolean result = range1.equals(range2);
 		assertTrue("compare (-5,5) to (-5,5), bounds same. should return true", result);
 	}
 	
-	//////////////////////////////////////////////////////////////////////
-	//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
 	
 	/**
 	 * Hash code test.
@@ -571,27 +733,127 @@ public class RangeTest_2_OtherFuncs {
 		assertNotNull("hashcode should be something... it is null.", hashCode);
 	}
 	
-	//////////////////////////////////////////////////////////////////////
-	//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
 	
 	/**
 	 * To string test.
 	 */
 	@Test
 	public void toString_Test() {
-		// "Range[lower,upper]"
-		// return ("Range[" + this.lower + "," + this.upper + "]");
-		// String.equals(); ???
+// "Range[lower,upper]"
+// return ("Range[" + this.lower + "," + this.upper + "]");
+// String.equals(); ???
 		Range range = new Range(-5, 5);
-		String myString = "Range[-5,5]";
+		String myString = "Range[-5.0,5.0]";
 		String rangeString = range.toString();
-		// assertEquals("(-5,5) shifted by 5 and NO zero crossing should return (5,10).
-		// Lower bound should be 5.",
-		// myString, rangeString, .000000001d);
-		// TODO: CANNOT HAVE MESSAGE WITH STRING COMPARAISON!!!
-		assertEquals(myString, rangeString);
+// assertEquals("(-5,5) shifted by 5 and NO zero crossing should return (5,10).
+// Lower bound should be 5.",
+// myString, rangeString, .000000001d);
+// TODO: CANNOT HAVE MESSAGE WITH STRING COMPARAISON!!!
+		assertEquals("myString: " + myString + " ...rangeString: " + rangeString, myString, rangeString);
+		// assertNotNull("myString: " + myString + " ...rangeString: " + rangeString,
+		// rangeString);
 		
 	}
-	//////////////////////////////////////////////////////////////////////
-	//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+	
+	/*
+	 * Creates Range with lower bound larger than upper
+	 */
+	
+	/**
+	 * Range with lower greater than upper.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void rangeWithLowerGreaterThanUpper() {
+		double lower = 10;
+		double upper = 0;
+		new Range(lower, upper);
+	}
+	
+	/**
+	 * Constrain value above range.
+	 */
+	/*
+	 * Test Constrain when value is not in range - above range
+	 */
+	@Test
+	public void constrainValueAboveRange() {
+		double lower = -10;
+		double upper = 10;
+		Range exampleRange = new Range(lower, upper);
+		double result = exampleRange.constrain(upper + 1);
+		assertEquals("Constrain upper when value out of range", upper, result, .000000001d);
+	}
+	
+	/**
+	 * Constrain value below range.
+	 */
+	/*
+	 * Test Constrain when value isnt in range - below range
+	 */
+	@Test
+	public void constrainValueBelowRange() {
+		double lower = -10;
+		double upper = 10;
+		Range exampleRange = new Range(lower, upper);
+		double result = exampleRange.constrain(lower - 1);
+		assertEquals("Constrain lower when value out of range", lower, result, .000000001d);
+	}
+	
+	
+	//Mutation Testing tests
+	
+	/*
+	 * 
+	 * Test range almost overlaps on bottom
+	 * */
+	@Test
+	public void intersects_almost_intersects_bottom() {
+		Range myRange = new Range(0, 5);
+		boolean intersects = myRange.intersects(-5, 0);
+		assertFalse("test that almost intersecting on bottom ranges dont intersect ", intersects);
+		
+	}
+	
+	/*
+	 * 
+	 * Test range almost intersects on top
+	 * */
+	@Test
+	public void intersects_almost_intersects_top() {
+		Range myRange = new Range(-5, 0);
+		boolean intersects = myRange.intersects(0, 5);
+		assertFalse("test that almost intersecting on top ranges dont intersect ", intersects);
+		
+	}
+	
+	/*
+	 * 
+	 * Test range where lower > upper
+	 * */
+	@Test
+	public void intersects_invalid_range() {
+		Range myRange = new Range(0, 5);
+		boolean intersects = myRange.intersects(5, 0);
+		assertFalse("test where lower > upper doesnt intersect ", intersects);
+		
+	}
+	
+
+	
+	/*
+	 * check that hash code return the correct result
+	 * */
+	@Test
+	public void check_hashcode_is_correct() {
+		Range myRange = new Range(-10, -1);
+		int hashCode = myRange.hashCode();
+		int expectedHashCode = -2080112640;
+		assertEquals("the hashcode result should be the same as expected", hashCode, expectedHashCode);
+		
+	}
+	
 }
