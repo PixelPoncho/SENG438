@@ -1,0 +1,77 @@
+{
+  "id": "912ec341-b634-4589-93f0-14778d8093ef",
+  "version": "2.0",
+  "name": "TestProject0",
+  "url": "https://www.amazon.ca",
+  "tests": [{
+    "id": "56a144aa-03c5-41c5-8833-cd49683c1d93",
+    "name": "Untitled",
+    "commands": [{
+      "id": "921d98c8-b478-4b3e-a22f-2fb3c4a291a5",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "7de14e60-1e8a-4ac7-b208-5c2bdd42ad43",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1440x900",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "a9eedb43-afbf-4688-9b25-630e3b5e719a",
+      "comment": "",
+      "command": "click",
+      "target": "id=twotabsearchtextbox",
+      "targets": [
+        ["id=twotabsearchtextbox", "id"],
+        ["name=field-keywords", "name"],
+        ["css=#twotabsearchtextbox", "css:finder"],
+        ["xpath=//input[@id='twotabsearchtextbox']", "xpath:attributes"],
+        ["xpath=//div[@id='nav-search']/form/div[3]/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4a29365e-674a-431e-8a82-ec5c4128f2b4",
+      "comment": "",
+      "command": "type",
+      "target": "id=twotabsearchtextbox",
+      "targets": [
+        ["id=twotabsearchtextbox", "id"],
+        ["name=field-keywords", "name"],
+        ["css=#twotabsearchtextbox", "css:finder"],
+        ["xpath=//input[@id='twotabsearchtextbox']", "xpath:attributes"],
+        ["xpath=//div[@id='nav-search']/form/div[3]/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/input", "xpath:position"]
+      ],
+      "value": "Apple HomePod"
+    }, {
+      "id": "46904f82-0b80-48b4-b224-803f78c6d496",
+      "comment": "",
+      "command": "sendKeys",
+      "target": "id=twotabsearchtextbox",
+      "targets": [
+        ["id=twotabsearchtextbox", "id"],
+        ["name=field-keywords", "name"],
+        ["css=#twotabsearchtextbox", "css:finder"],
+        ["xpath=//input[@id='twotabsearchtextbox']", "xpath:attributes"],
+        ["xpath=//div[@id='nav-search']/form/div[3]/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/input", "xpath:position"]
+      ],
+      "value": "${KEY_ENTER}"
+    }]
+  }],
+  "suites": [{
+    "id": "ac393802-09b4-4f66-aa9c-100be914ff87",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["56a144aa-03c5-41c5-8833-cd49683c1d93"]
+  }],
+  "urls": ["https://www.amazon.ca/"],
+  "plugins": []
+}
