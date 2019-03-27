@@ -1091,4 +1091,49 @@ public class DataUtilitesTests extends DataUtilities {
 		
 		assertEquals("testing CalculateColumnTotal with 0 rows", 0, result, .000000001d);
 	}
+	
+	//////////////////////////////////////////////////////////////////
+	//              Mutation tests
+	//////////////////////////////////////////////////////////////////
+	
+	
+	@Test
+	public void getCumulativePercentageTestExpectedValuesWithNull() {
+		DefaultKeyedValues input = new DefaultKeyedValues();
+
+		Number five = 5;
+		Number nine = 9;
+		Number two = 2;
+		Number nullVal = null;
+		input.addValue(0, five);
+		input.addValue(1, nine);
+		input.addValue(2, two);
+		input.addValue(3, nullVal);
+	
+		KeyedValues mine = DataUtilities.getCumulativePercentages(input);
+		DefaultKeyedValues output = new DefaultKeyedValues();
+		Number point3 = 0.3125;
+		Number point8 = 0.875;
+		Number one = 1.0;
+		output.addValue(0, point3);
+		output.addValue(1, point8);
+		output.addValue(2, one);
+		output.addValue(3, one);
+		
+		try {
+			assertEquals(output.getIndex(0), mine.getIndex(0));
+			assertEquals(output.getKeys(), mine.getKeys());
+			assertEquals(output.getKey(0), mine.getKey(0));
+			assertEquals(output.getKey(1), mine.getKey(1));
+			assertEquals(output.getKey(2), mine.getKey(2));
+			assertEquals(output.getKey(3), mine.getKey(3));
+			assertEquals(output.getValue(0), mine.getValue(0));
+			assertEquals(output.getValue(1), mine.getValue(1));
+			assertEquals(output.getValue(2), mine.getValue(2));
+			assertEquals(output.getValue(3), mine.getValue(3));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 }
