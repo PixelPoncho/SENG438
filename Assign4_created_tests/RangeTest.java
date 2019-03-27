@@ -873,6 +873,38 @@ public class RangeTest {
 		
 	}
 	
+	/*
+	 * Check for shift without zero crossing, shifting up
+	 * */
+	@Test
+	public void shift_Shouldnt_cross_zero_shiftUp() {
+		Range base = new Range(-5, 0.5);
+		double delta = 10;
+		Range result = Range.shift(base, delta);
+		assertEquals("(-5,0.5) shifted by 10 and NO zero crossing should return (0,10.5). Lower bound should be 0.",
+				0, result.getLowerBound(), .000000001d);
+		assertEquals("(-5,0.5) shifted by 10 and NO zero crossing should return (0,10.5). Upper bound should be 10.5.", 10.5,
+				result.getUpperBound(), .000000001d);
+		
+		
+	}
+	
+	/*
+	 * Check for shift without zero crossing
+	 * */
+	@Test
+	public void shift_Shouldnt_cross_zero_CloseToZero() {
+		Range base = new Range(-5, 0.5);
+		double delta = -10;
+		Range result = Range.shift(base, delta);
+		assertEquals("(-5,0.5) shifted by -10 and NO zero crossing should return (-15,0). Lower bound should be -15.",
+				-15, result.getLowerBound(), .000000001d);
+		assertEquals("(-5,5) shifted by -10 and NO zero crossing should return (-15,0). Upper bound should be 0.", 0,
+				result.getUpperBound(), .000000001d);
+		
+		
+	}
+	
 	
 	/**
 	 * Combine both not null test where ranges overlap.
@@ -888,4 +920,22 @@ public class RangeTest {
 				result.getUpperBound(), .000000001d);
 		
 	}
+	
+//	@Test
+//	public void constrain_justAboveUpperBound_test() {
+//		Range myRange = new Range(-5, 5);
+//		double constrains = myRange.constrain(6);
+//// assertEquals(message, expected, actual);
+//		assertEquals("(-5,5) should constrain 6 to 5", 5, constrains, .000000001d);
+//	
+//	}
+//	
+//	@Test
+//	public void constrain_justBelowLowerBound_test() {
+//		Range myRange = new Range(-5, 5);
+//		double constrains = myRange.constrain(-6);
+//// assertEquals(message, expected, actual);
+//		assertEquals("(-5,5) should constrain -6 to -5", -5, constrains, .000000001d);
+//	
+//	}
 }
