@@ -856,4 +856,20 @@ public class RangeTest {
 		
 	}
 	
+	/*
+	 * Check for shift without zero crossing
+	 * */
+	@Test
+	public void shift_Shouldnt_cross_zero() {
+		Range base = new Range(-5, 5);
+		double delta = -10;
+		Range result = Range.shift(base, delta);
+		assertEquals("(-5,5) shifted by -10 and NO zero crossing should return (-15,0). Lower bound should be -15.",
+				-15, result.getLowerBound(), .000000001d);
+		assertEquals("(-5,5) shifted by -10 and NO zero crossing should return (-15,0). Upper bound should be 0.", 0,
+				result.getUpperBound(), .000000001d);
+		
+		
+	}
+	
 }
