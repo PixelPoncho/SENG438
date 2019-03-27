@@ -803,8 +803,9 @@ public class RangeTest {
 		assertEquals("Constrain lower when value out of range", lower, result, .000000001d);
 	}
 	
-	
+	///////////////////////////////////////////
 	//Mutation Testing tests
+	//////////////////////////////////////////
 	
 	/*
 	 * 
@@ -872,4 +873,19 @@ public class RangeTest {
 		
 	}
 	
+	
+	/**
+	 * Combine both not null test where ranges overlap.
+	 */
+	@Test
+	public void combine_bothNotNull_Range_Overlaps_Test() {
+		Range range1 = new Range(0, 10);
+		Range range2 = new Range(-5, 5);
+		Range result = Range.combine(range1, range2);
+		assertEquals("test lower bound of combine when ranges overlap", -5,
+				result.getLowerBound(), .000000001d);
+		assertEquals("test upper bound of combine when ranges overlap", 10,
+				result.getUpperBound(), .000000001d);
+		
+	}
 }
