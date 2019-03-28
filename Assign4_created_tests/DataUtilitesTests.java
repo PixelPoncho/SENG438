@@ -639,7 +639,7 @@ public class DataUtilitesTests extends DataUtilities {
 	/**
 	 * Calculate column total for null values 2 D.
 	 */
-	@Test(expected = NullPointerException.class)
+	@Test(expected = InvalidParameterException.class)
 	public void calculateColumnTotalForNullValues2D() {
 		
 		double result = DataUtilities.calculateColumnTotal(null, 0);
@@ -761,7 +761,7 @@ public class DataUtilitesTests extends DataUtilities {
 	/**
 	 * Calculate row total for null values 2 D.
 	 */
-	@Test(expected = NullPointerException.class)
+	@Test(expected = InvalidParameterException.class)
 	public void calculateRowTotalForNullValues2D() {
 		
 		double result = DataUtilities.calculateRowTotal(null, 0);
@@ -1040,7 +1040,7 @@ public class DataUtilitesTests extends DataUtilities {
 	/*
 	 * Sends null in as argument when creating Number Array
 	 */
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = InvalidParameterException.class)
 	public void createNumberArrayWithNull() {
 		DataUtilities.createNumberArray(null);
 	}
@@ -1051,7 +1051,7 @@ public class DataUtilitesTests extends DataUtilities {
 	/*
 	 * Sends null in as argument when creating 2D Number Array
 	 */
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = InvalidParameterException.class)
 	public void create2DNumberArrayWithNull() {
 		DataUtilities.createNumberArray2D(null);
 	}
@@ -1064,7 +1064,7 @@ public class DataUtilitesTests extends DataUtilities {
 	/*
 	 * Sends null in as argument when getting cumulative percentages
 	 */
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = InvalidParameterException.class)
 	public void getCumulativePercentagesWithNull() {
 		DataUtilities.getCumulativePercentages(null);
 	}

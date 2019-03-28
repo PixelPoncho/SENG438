@@ -45,6 +45,8 @@
 
 package org.jfree.data;
 
+import java.security.InvalidParameterException;
+
 import org.jfree.data.general.DatasetUtilities;
 
 /**
@@ -65,7 +67,10 @@ public abstract class DataUtilities {
      * @return The sum of the values in the specified column.
      */
     public static double calculateColumnTotal(Values2D data, int column) {
-        double total = 0.0;
+    	if (data == null) {
+			throw new InvalidParameterException("first parameter cannot be null");
+		}
+    	double total = 0.0;
         int rowCount = data.getRowCount();
         for (int r = 0; r < rowCount; r++) {
             Number n = data.getValue(r, column);
@@ -88,7 +93,10 @@ public abstract class DataUtilities {
      * @return The total of the values in the specified row.
      */
     public static double calculateRowTotal(Values2D data, int row) {
-        double total = 0.0;
+    	if (data == null) {
+			throw new InvalidParameterException("first parameter cannot be null");
+		}
+    	double total = 0.0;
         int columnCount = data.getColumnCount();
         for (int c = 0; c < columnCount; c++) {
             Number n = data.getValue(row, c);
@@ -111,7 +119,7 @@ public abstract class DataUtilities {
      */
     public static Number[] createNumberArray(double[] data) {
         if (data == null) {
-            throw new IllegalArgumentException("Null 'data' argument.");   
+            throw new InvalidParameterException("Null 'data' argument.");   
         }
         Number[] result = new Number[data.length];
         for (int i = 0; i < data.length; i++) {
@@ -132,7 +140,7 @@ public abstract class DataUtilities {
      */
     public static Number[][] createNumberArray2D(double[][] data) {
         if (data == null) {
-            throw new IllegalArgumentException("Null 'data' argument.");   
+            throw new InvalidParameterException("Null 'data' argument.");   
         }
         int l1 = data.length;
         Number[][] result = new Number[l1][];
@@ -172,7 +180,7 @@ public abstract class DataUtilities {
      */
     public static KeyedValues getCumulativePercentages(KeyedValues data) {
         if (data == null) {
-            throw new IllegalArgumentException("Null 'data' argument.");   
+            throw new InvalidParameterException("Null 'data' argument.");   
         }
         DefaultKeyedValues result = new DefaultKeyedValues();
         double total = 0.0;
