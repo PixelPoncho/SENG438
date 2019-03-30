@@ -297,6 +297,13 @@
         ["xpath=//span/input", "xpath:position"]
       ],
       "value": ""
+    }, {
+      "id": "d5008488-51b2-4d8d-adaf-6089fbb2416e",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=continue",
+      "targets": [],
+      "value": ""
     }]
   }, {
     "id": "186f9b95-7e13-4a94-a60e-4dc0c0d9bc16",
@@ -455,6 +462,13 @@
         ["xpath=//form/div/div/div/input", "xpath:position"]
       ],
       "value": "echo "
+    }, {
+      "id": "de7cd44c-6465-462e-bf8f-363037829fad",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=helpsearch",
+      "targets": [],
+      "value": ""
     }, {
       "id": "3e01c5e6-21bd-4f2a-b672-85d3bea2f5eb",
       "comment": "",
